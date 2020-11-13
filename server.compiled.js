@@ -224,9 +224,10 @@ function () {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            console.log("User authenticated through Google! In passport callback."); //Our convention is to build userId from displayName and provider
+            console.log("User authenticated through Google! In passport callback."); //console.log(profile)
+            //Our convention is to build userId from displayName and provider
 
-            userId = "".concat(profile.username, "@").concat(profile.provider); //See if document with this unique userId exists in database 
+            userId = "".concat(profile.given_name, "_").concat(profile.family_name, "@").concat(profile.provider); //See if document with this unique userId exists in database 
 
             _context2.next = 4;
             return User.findOne({
@@ -279,29 +280,32 @@ _passport["default"].use(new FacebookStrategy({
 //The following function is called after user authenticates with github
 function () {
   var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime["default"].mark(function _callee3(accessToken, refreshToken, profile, done) {
-    var userId, currentUser;
+    var email, emailId, userId, currentUser;
     return _regeneratorRuntime["default"].wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            console.log("User authenticated through Facebook! In passport callback."); //Our convention is to build userId from displayName and provider
+            console.log("User authenticated through Facebook! In passport callback.");
+            console.log(profile);
+            email = "".concat(profile._json.email);
+            emailId = email.split('@'); //Our convention is to build userId from displayName and provider
 
-            userId = "".concat(profile.username, "@").concat(profile.provider); //See if document with this unique userId exists in database 
+            userId = "".concat(emailId[0], "@").concat(profile.provider); //See if document with this unique userId exists in database 
 
-            _context3.next = 4;
+            _context3.next = 7;
             return User.findOne({
               id: userId
             });
 
-          case 4:
+          case 7:
             currentUser = _context3.sent;
 
             if (currentUser) {
-              _context3.next = 9;
+              _context3.next = 12;
               break;
             }
 
-            _context3.next = 8;
+            _context3.next = 11;
             return new User({
               id: userId,
               displayName: profile.displayName,
@@ -310,13 +314,13 @@ function () {
               rounds: []
             }).save();
 
-          case 8:
+          case 11:
             currentUser = _context3.sent;
 
-          case 9:
+          case 12:
             return _context3.abrupt("return", done(null, currentUser));
 
-          case 10:
+          case 13:
           case "end":
             return _context3.stop();
         }
@@ -479,7 +483,9 @@ app.get('/auth/github', _passport["default"].authenticate('github'));
 app.get('/auth/google', _passport["default"].authenticate('google', {
   scope: ['profile']
 }));
-app.get('/auth/facebook', _passport["default"].authenticate('facebook')); //CALLBACK route:  GitHub will call this route after the
+app.get('/auth/facebook', _passport["default"].authenticate('facebook', {
+  scope: ['email']
+})); //CALLBACK route:  GitHub will call this route after the
 //OAuth authentication process is complete.
 //req.isAuthenticated() tells us whether authentication was successful.
 

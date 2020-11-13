@@ -122,8 +122,9 @@ passport.use(new GoogleStrategy ({
   //The following function is called after user authenticates with github
   async (accessToken, refreshToken, profile, done) => {
     console.log("User authenticated through Google! In passport callback.");
+    //console.log(profile)
     //Our convention is to build userId from displayName and provider
-    const userId = `${profile.username}@${profile.provider}`;
+    const userId = `${profile.given_name}_${profile.family_name}@${profile.provider}`;
     //See if document with this unique userId exists in database 
     let currentUser = await User.findOne({id: userId});
     if (!currentUser) { //Add this user to the database
@@ -148,8 +149,11 @@ passport.use(new FacebookStrategy ({
   //The following function is called after user authenticates with github
   async (accessToken, refreshToken, profile, done) => {
     console.log("User authenticated through Facebook! In passport callback.");
+    console.log(profile)
+    const email = `${profile._json.email}`
+    const emailId = email.split('@')
     //Our convention is to build userId from displayName and provider
-    const userId = `${profile.username}@${profile.provider}`;
+    const userId = `${emailId[0]}@${profile.provider}`;
     //See if document with this unique userId exists in database 
     let currentUser = await User.findOne({id: userId});
     if (!currentUser) { //Add this user to the database
@@ -247,7 +251,7 @@ app.get('/auth/github', passport.authenticate('github'));
 
 app.get('/auth/google', passport.authenticate('google', {scope: ['profile']}));
 
-app.get('/auth/facebook', passport.authenticate('facebook'));
+app.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email']}));
 
 //CALLBACK route:  GitHub will call this route after the
 //OAuth authentication process is complete.

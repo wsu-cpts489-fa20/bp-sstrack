@@ -14,6 +14,8 @@ var _path = _interopRequireDefault(require("path"));
 
 var _express = _interopRequireDefault(require("express"));
 
+var _dotenv = _interopRequireDefault(require("dotenv"));
+
 var _mongoose = _interopRequireDefault(require("mongoose"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -35,7 +37,15 @@ var DEPLOY_URL = "http://localhost:8081";
 var PORT = process.env.HTTP_PORT || LOCAL_PORT;
 var GithubStrategy = _passportGithub["default"].Strategy;
 var LocalStrategy = _passportLocal["default"].Strategy;
-var app = (0, _express["default"])(); //////////////////////////////////////////////////////////////////////////
+var app = (0, _express["default"])();
+
+var result = _dotenv["default"].config();
+
+if (result.error) {
+  throw result.error;
+}
+
+console.log(result.parsed); //////////////////////////////////////////////////////////////////////////
 //MONGOOSE SET-UP
 //The following code sets up the app to connect to a MongoDB database
 //using the mongoose library.

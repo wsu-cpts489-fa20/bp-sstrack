@@ -10,6 +10,7 @@ import session from 'express-session';
 import regeneratorRuntime from "regenerator-runtime";
 import path from 'path';
 import express from 'express';
+import dotenv from 'dotenv'
 require('dotenv').config();
 
 const LOCAL_PORT = 8081;
@@ -18,6 +19,14 @@ const PORT = process.env.HTTP_PORT || LOCAL_PORT;
 const GithubStrategy = passportGithub.Strategy;
 const LocalStrategy = passportLocal.Strategy;
 const app = express();
+
+const result = dotenv.config()
+
+if (result.error) {
+  throw result.error
+}
+
+console.log(result.parsed)
 
 //////////////////////////////////////////////////////////////////////////
 //MONGOOSE SET-UP

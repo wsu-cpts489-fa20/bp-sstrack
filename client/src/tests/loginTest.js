@@ -18,8 +18,8 @@ test('Login goes to main page', async t => {
         .expect(emailInput.value).eql(email)
         .expect(passwordInput.value).eql(pw)
         // Logs in and checks if coursePage is displayed
-        .click('#login-btn-icon')
-        .expect(Selector('#activityFeed').visible).eql(true)
+        .click('#loginBtn')
+        .expect(Selector('#feedPage').visible).eql(true)
 });
 
 test('Login Github', async t => {
@@ -48,7 +48,6 @@ test('Create account', async t => {
     const securityAnsr = Selector("#securityQAnswer");
 
     await t 
-        //.click(Selector('createOrEditAccount').find('Create New Account'))
         .click("#createAccount")
         .typeText(emailIn, email)
         .typeText(displayName,username)

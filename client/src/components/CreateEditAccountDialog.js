@@ -203,7 +203,7 @@ class CreateEditAccountDialog extends React.Component {
     return (  
     <div className="modal" role="dialog">
     <div className="modal-dialog modal-lg"></div>
-        <div id="createOrEditAccount" className="modal-content form-center">
+        <div className="modal-content form-center">
             <div className="modal-header">
               <h3 ><b>{this.props.create ? "Create New Account" : "Edit Account"}</b></h3>
               <button className="modal-close" 

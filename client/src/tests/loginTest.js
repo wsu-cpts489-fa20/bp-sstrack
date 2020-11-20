@@ -48,7 +48,7 @@ test('Create account', async t => {
     const securityAnsr = Selector("#securityQAnswer");
 
     await t 
-        .click(Selector('createOrEditAccount').find('Create New Account'))
+        .click("#createAccount")
         .typeText(emailIn, email)
         .typeText(displayName,username)
         .typeText(pwIn, pw)
@@ -57,6 +57,6 @@ test('Create account', async t => {
         .typeText(securityQuestion,sQ)
         .typeText(securityAnsr, ans)
 
-        .click("#createAccount")
+        .click("#submitCreateOrUpdate")
 
 })

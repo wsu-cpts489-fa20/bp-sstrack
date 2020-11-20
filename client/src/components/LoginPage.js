@@ -183,14 +183,14 @@ cancelCreateAccount = () => {
                 />
             </label>
             <p />
-            <label id ="passwordInput" htmlFor="passwordInput" style={{ padding: 0, fontSize: 24 }}>
+            <label htmlFor="passwordInput" style={{ padding: 0, fontSize: 24 }}>
                 Password:
                 <input
                 ref={this.passwordInputRef}
                 className="form-control login-text"
                 type="password"
                 placeholder="Enter Password"
-                id ="passwordInput"
+                id="passwordInput"
                 pattern="[A-Za-z0-9!@#$%^&*()_+\-]+"
                 required={true}
                 />
@@ -210,7 +210,7 @@ cancelCreateAccount = () => {
                         onClick={() => {this.setState({showLookUpAccountDialog: true});}}>
                 Reset your password</button>
             </p>  
-            <button id="gitHubBtn" type="button" className="btn btn-github"
+            <button type="button" className="btn btn-github"
                onClick={() => this.handleOAuthLoginClick("github")}>
               <span id="gitHubBtn" className={this.state.githubIcon}></span>&nbsp;
                 {this.state.githubLabel}

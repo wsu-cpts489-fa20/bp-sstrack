@@ -203,9 +203,9 @@ class CreateEditAccountDialog extends React.Component {
     return (  
     <div className="modal" role="dialog">
     <div className="modal-dialog modal-lg"></div>
-        <div className="modal-content form-center">
+        <div id="createOrEditAccount" className="modal-content form-center">
             <div className="modal-header">
-              <h3><b>{this.props.create ? "Create New Account" : "Edit Account"}</b></h3>
+              <h3 ><b>{this.props.create ? "Create New Account" : "Edit Account"}</b></h3>
               <button className="modal-close" 
                        onClick={this.props.cancel}>
                 &times;</button>
@@ -214,7 +214,8 @@ class CreateEditAccountDialog extends React.Component {
             <form onSubmit={this.handleSubmit}>
             <label>
                 Email: 
-                <input  
+                <input
+                id="email"  
                 autocomplete="off"
                 disabled={!this.props.create}
                 className="form-control form-text form-center"
@@ -234,6 +235,7 @@ class CreateEditAccountDialog extends React.Component {
             <label>
                 Password:
                 <input
+                id="password"
                 autocomplete="off"
                 className="form-control form-text form-center"
                 name="password"
@@ -255,6 +257,7 @@ class CreateEditAccountDialog extends React.Component {
                 name="passwordRepeat"
                 type="password"
                 size="35"
+                id="passwordR"
                 placeholder="Repeat Password"
                 required={true}
                 ref={this.repeatPassRef}
@@ -266,6 +269,7 @@ class CreateEditAccountDialog extends React.Component {
             <label>
                 Display Name:
                 <input
+                id="displayName"
                 className="form-control form-text form-center"
                 name="displayName"
                 type="text"
@@ -298,6 +302,7 @@ class CreateEditAccountDialog extends React.Component {
             <label>
                 Security Question:
                 <textarea
+                id="securityQ"
                 className="form-control form-text form-center"
                 name="securityQuestion"
                 size="35"
@@ -314,6 +319,7 @@ class CreateEditAccountDialog extends React.Component {
             <label>
                 Answer to Security Question:
                 <textarea
+                id="securityQAnswer"
                 className="form-control form-text form-center"
                 name="securityAnswer"
                 type="text"
@@ -332,7 +338,7 @@ class CreateEditAccountDialog extends React.Component {
                 Delete Account...
             </button> : null}
             <br/><br/>
-            <button role="submit" 
+            <button id="submitCreateOrUpdate" role="submit" 
                 disabled={!this.state.formUpdated}
                 className="btn btn-primary btn-color-theme modal-submit-btn">
                 <span className={this.props.create ? "fa fa-user-plus" : "fa fa-user"}></span>

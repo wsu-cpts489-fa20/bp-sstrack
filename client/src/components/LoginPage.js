@@ -152,7 +152,7 @@ cancelCreateAccount = () => {
 
   render() {
     return(
-        <div>
+        <div id="loginDiv">
         <center>
         {this.state.statusMsg != "" ? <div className="status-msg"><span>{this.state.statusMsg}</span>
                        <button className="modal-close" onClick={this.closeStatusMsg}>
@@ -183,7 +183,7 @@ cancelCreateAccount = () => {
                 />
             </label>
             <p />
-            <label htmlFor="passwordInput" style={{ padding: 0, fontSize: 24 }}>
+            <label id ="passwordInput" htmlFor="passwordInput" style={{ padding: 0, fontSize: 24 }}>
                 Password:
                 <input
                 ref={this.passwordInputRef}
@@ -210,9 +210,9 @@ cancelCreateAccount = () => {
                         onClick={() => {this.setState({showLookUpAccountDialog: true});}}>
                 Reset your password</button>
             </p>  
-            <button type="button" className="btn btn-github"
+            <button id="gitHubBtn" type="button" className="btn btn-github"
                onClick={() => this.handleOAuthLoginClick("github")}>
-              <span className={this.state.githubIcon}></span>&nbsp;
+              <span id="gitHubBtn" className={this.state.githubIcon}></span>&nbsp;
                 {this.state.githubLabel}
             </button>
             <p>

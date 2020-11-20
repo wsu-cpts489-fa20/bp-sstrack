@@ -57,6 +57,6 @@ test('Create account', async t => {
         .typeText(securityQuestion,sQ)
         .typeText(securityAnsr, ans)
 
-        .click("#createAccount")
+        .click("#submitCreateOrUpdate")
 
 })

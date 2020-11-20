@@ -4,7 +4,7 @@ class FeedPage extends React.Component {
 
     render() {
         return (
-        <div id="activityFeed" className="padded-page">
+        <div id='feedPage' className="padded-page">
             <center>
             <h1 >Activity Feed</h1>
             <h2>This page is under construction.</h2>

@@ -232,7 +232,7 @@ app
   .use(session({secret: "speedgolf", 
                 resave: false,
                 saveUninitialized: false,
-                cookie: {maxAge: 1000 * 60 * 24}}))
+                cookie: {maxAge: 1000 * 60 * 60}}))
   .use(express.static(path.join(__dirname,"client/build")))
   .use(passport.initialize())
   .use(passport.session())

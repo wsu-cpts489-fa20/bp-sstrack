@@ -3,6 +3,8 @@
 This week, we focused on bringing everything up to speed due to the technical issues we had last week. We currently have updated the login system with oauth logins and fixed the cookie duration associated with logging in. The files associated with these changes are LoginPage.js and server.js.
 Other features that were supposed to be worked on (but no changes were pushed to the repository) included expanding the user account settings, expanding the information entered when entering a new round, and being able to sort listed rounds in a variety of ways. Due to the lack of communication and code present for these changes, I cannot give any updates related to how they progressed this milestone.
 
+Link to tests recording for this week: https://streamable.com/m2rfcw
+
 
 # Final Speedgolf App
 This code base starts with the MERN stack MVP implmentation of the speedgolf

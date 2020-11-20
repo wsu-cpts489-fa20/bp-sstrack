@@ -195,7 +195,7 @@ cancelCreateAccount = () => {
                 />
             </label>
             <p className="bg-danger" id="feedback" style={{ fontSize: 16 }} />
-            <button
+            <button id="loginBtn"
                 type="submit"
                 className="btn-color-theme btn btn-primary btn-block login-btn">
                 <span id="login-btn-icon" className={this.state.loginBtnIcon}/>

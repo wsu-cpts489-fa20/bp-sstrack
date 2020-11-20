@@ -51,11 +51,14 @@ if (result.error) {
   throw result.error;
 }
 
-console.log(result.parsed); //////////////////////////////////////////////////////////////////////////
+console.log(result.parsed);
+
+var cookieParser = require('cookie-parser'); //////////////////////////////////////////////////////////////////////////
 //MONGOOSE SET-UP
 //The following code sets up the app to connect to a MongoDB database
 //using the mongoose library.
 //////////////////////////////////////////////////////////////////////////
+
 
 var connectStr = process.env.MONGO_STR;
 
@@ -165,24 +168,26 @@ function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            console.log("User authenticated through GitHub! In passport callback."); //Our convention is to build userId from displayName and provider
+            console.log("User authenticated through GitHub! In passport callback.");
+            console.log(accessToken); //console.log(refreshToken);
+            //Our convention is to build userId from displayName and provider
 
             userId = "".concat(profile.username, "@").concat(profile.provider); //See if document with this unique userId exists in database 
 
-            _context.next = 4;
+            _context.next = 5;
             return User.findOne({
               id: userId
             });
 
-          case 4:
+          case 5:
             currentUser = _context.sent;
 
             if (currentUser) {
-              _context.next = 9;
+              _context.next = 10;
               break;
             }
 
-            _context.next = 8;
+            _context.next = 9;
             return new User({
               id: userId,
               displayName: profile.displayName,
@@ -191,13 +196,13 @@ function () {
               rounds: []
             }).save();
 
-          case 8:
+          case 9:
             currentUser = _context.sent;
 
-          case 9:
+          case 10:
             return _context.abrupt("return", done(null, currentUser));
 
-          case 10:
+          case 11:
           case "end":
             return _context.stop();
         }
@@ -224,25 +229,26 @@ function () {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            console.log("User authenticated through Google! In passport callback."); //console.log(profile)
+            console.log("User authenticated through Google! In passport callback.");
+            console.log(accessToken); //console.log(profile)
             //Our convention is to build userId from displayName and provider
 
             userId = "".concat(profile.given_name, "_").concat(profile.family_name, "@").concat(profile.provider); //See if document with this unique userId exists in database 
 
-            _context2.next = 4;
+            _context2.next = 5;
             return User.findOne({
               id: userId
             });
 
-          case 4:
+          case 5:
             currentUser = _context2.sent;
 
             if (currentUser) {
-              _context2.next = 9;
+              _context2.next = 10;
               break;
             }
 
-            _context2.next = 8;
+            _context2.next = 9;
             return new User({
               id: userId,
               displayName: profile.displayName,
@@ -251,13 +257,13 @@ function () {
               rounds: []
             }).save();
 
-          case 8:
+          case 9:
             currentUser = _context2.sent;
 
-          case 9:
+          case 10:
             return _context2.abrupt("return", done(null, currentUser));
 
-          case 10:
+          case 11:
           case "end":
             return _context2.stop();
         }
@@ -287,25 +293,26 @@ function () {
           case 0:
             console.log("User authenticated through Facebook! In passport callback.");
             console.log(profile);
+            console.log(accessToken);
             email = "".concat(profile._json.email);
             emailId = email.split('@'); //Our convention is to build userId from displayName and provider
 
             userId = "".concat(emailId[0], "@").concat(profile.provider); //See if document with this unique userId exists in database 
 
-            _context3.next = 7;
+            _context3.next = 8;
             return User.findOne({
               id: userId
             });
 
-          case 7:
+          case 8:
             currentUser = _context3.sent;
 
             if (currentUser) {
-              _context3.next = 12;
+              _context3.next = 13;
               break;
             }
 
-            _context3.next = 11;
+            _context3.next = 12;
             return new User({
               id: userId,
               displayName: profile.displayName,
@@ -314,13 +321,13 @@ function () {
               rounds: []
             }).save();
 
-          case 11:
+          case 12:
             currentUser = _context3.sent;
 
-          case 12:
+          case 13:
             return _context3.abrupt("return", done(null, currentUser));
 
-          case 13:
+          case 14:
           case "end":
             return _context3.stop();
         }
@@ -458,7 +465,7 @@ _passport["default"].deserializeUser( /*#__PURE__*/function () {
 /////////////////////////////////////////////////////////////////////////
 
 
-app.use((0, _expressSession["default"])({
+app.use(cookieParser()).use((0, _expressSession["default"])({
   secret: "speedgolf",
   resave: false,
   saveUninitialized: false,
@@ -475,7 +482,10 @@ app.use((0, _expressSession["default"])({
 /////////////////////////
 //AUTHENTICATION ROUTES
 /////////////////////////
-//AUTHENTICATE route: Uses passport to authenticate with GitHub.
+
+app.get('/', function (req, res) {
+  res.cookie('name', 'express').send('cookie set');
+}); //AUTHENTICATE route: Uses passport to authenticate with GitHub.
 //Should be accessed when user clicks on 'Login with GitHub' button on 
 //Log In page.
 

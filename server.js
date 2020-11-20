@@ -30,7 +30,6 @@ if (result.error) {
   throw result.error
 }
 
-console.log(result.parsed)
 
 //////////////////////////////////////////////////////////////////////////
 //MONGOOSE SET-UP
@@ -98,6 +97,8 @@ passport.use(new GithubStrategy({
   //The following function is called after user authenticates with github
   async (accessToken, refreshToken, profile, done) => {
     console.log("User authenticated through GitHub! In passport callback.");
+    //console.log(accessToken);
+    //console.log(refreshToken);
     //Our convention is to build userId from displayName and provider
     const userId = `${profile.username}@${profile.provider}`;
     //See if document with this unique userId exists in database 
@@ -122,6 +123,7 @@ passport.use(new GoogleStrategy ({
   //The following function is called after user authenticates with github
   async (accessToken, refreshToken, profile, done) => {
     console.log("User authenticated through Google! In passport callback.");
+    //console.log(accessToken);
     //console.log(profile)
     //Our convention is to build userId from displayName and provider
     const userId = `${profile.given_name}_${profile.family_name}@${profile.provider}`;
@@ -149,7 +151,8 @@ passport.use(new FacebookStrategy ({
   //The following function is called after user authenticates with github
   async (accessToken, refreshToken, profile, done) => {
     console.log("User authenticated through Facebook! In passport callback.");
-    console.log(profile)
+    //console.log(profile);
+    //console.log(accessToken);
     const email = `${profile._json.email}`
     const emailId = email.split('@')
     //Our convention is to build userId from displayName and provider
@@ -229,7 +232,7 @@ app
   .use(session({secret: "speedgolf", 
                 resave: false,
                 saveUninitialized: false,
-                cookie: {maxAge: 1000 * 60}}))
+                cookie: {maxAge: 1000 * 60 * 24}}))
   .use(express.static(path.join(__dirname,"client/build")))
   .use(passport.initialize())
   .use(passport.session())

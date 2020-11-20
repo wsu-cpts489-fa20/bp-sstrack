@@ -156,7 +156,7 @@ cancelCreateAccount = () => {
 
   render() {
     return(
-        <div>
+        <div id="loginDiv">
         <center>
         {this.state.statusMsg != "" ? <div className="status-msg"><span>{this.state.statusMsg}</span>
                        <button className="modal-close" onClick={this.closeStatusMsg}>
@@ -194,19 +194,20 @@ cancelCreateAccount = () => {
                 className="form-control login-text"
                 type="password"
                 placeholder="Enter Password"
+                id="passwordInput"
                 pattern="[A-Za-z0-9!@#$%^&*()_+\-]+"
                 required={true}
                 />
             </label>
             <p className="bg-danger" id="feedback" style={{ fontSize: 16 }} />
-            <button
+            <button id="loginBtn"
                 type="submit"
                 className="btn-color-theme btn btn-primary btn-block login-btn">
                 <span id="login-btn-icon" className={this.state.loginBtnIcon}/>
                 &nbsp;{this.state.loginBtnLabel}
             </button>
             <p>
-            <button type="button" className="btn btn-link login-link" 
+            <button id="createAccount" type="button" className="btn btn-link login-link" 
                     onClick={() => {this.setState({showCreateAccountDialog: true});}}>
                 Create an account</button> | 
                 <button type="button" className="btn btn-link login-link"
@@ -215,7 +216,7 @@ cancelCreateAccount = () => {
             </p>  
             <button type="button" className="btn btn-github"
                onClick={() => this.handleOAuthLoginClick("github")}>
-              <span className={this.state.githubIcon}></span>&nbsp;
+              <span id="gitHubBtn" className={this.state.githubIcon}></span>&nbsp;
                 {this.state.githubLabel}
             </button>
             <button type="button" className="btn btn-google" 

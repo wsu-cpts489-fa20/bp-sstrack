@@ -18,8 +18,8 @@ test('Login goes to main page', async t => {
         .expect(emailInput.value).eql(email)
         .expect(passwordInput.value).eql(pw)
         // Logs in and checks if coursePage is displayed
-        .click('#loginBtn')
-        .expect(Selector('#feedPage').visible).eql(true)
+        .click('#login-btn-icon')
+        .expect(Selector('#activityFeed').visible).eql(true)
 });
 
 test('Login Github', async t => {

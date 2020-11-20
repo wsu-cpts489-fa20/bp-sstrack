@@ -22,6 +22,10 @@ constructor() {
                   showResetPaswordDialog: false,
                   githubIcon: "fa fa-github",
                   githubLabel: "Sign in with GitHub",
+                  googleIcon: "fa fa-google",
+                  googleLabel: "Sign in with Google",
+                  facebookIcon: "fa fa-facebook",
+                  facebookLabel: "Sign in with Facebook",
                   loginMsg: "",
                   newAccountCreated: false
                   };
@@ -214,6 +218,17 @@ cancelCreateAccount = () => {
                onClick={() => this.handleOAuthLoginClick("github")}>
               <span id="gitHubBtn" className={this.state.githubIcon}></span>&nbsp;
                 {this.state.githubLabel}
+            </button>
+            <button type="button" className="btn btn-google" 
+                onClick={() => this.handleOAuthLoginClick("google")}>
+                <span className={this.state.googleIcon}></span>&nbsp;
+                    {this.state.googleLabel}
+            </button>
+
+            <button type="button" className="btn btn-facebook" 
+                onClick={() => this.handleOAuthLoginClick("facebook")}>
+                <span className={this.state.facebookIcon}></span>&nbsp;
+                    {this.state.facebookLabel}
             </button>
             <p>
                 <i>Version CptS 489</i>

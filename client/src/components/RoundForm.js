@@ -11,8 +11,13 @@ class RoundForm extends React.Component {
     //If logging a new round, the starting state is a default round with
     //today's date.
     this.state = {date:  today.toISOString().substr(0,10), 
+                  Wind:"calm",
+                  Weather:"clear",
                   course: "",
                   type: "practice",
+                  Fairways: 1,
+                  Greens: 1,
+                  putt: 1,
                   holes: "18",
                   strokes: 80,
                   minutes: 50,
@@ -91,6 +96,31 @@ class RoundForm extends React.Component {
                 type="date" value={this.state.date} onChange={this.handleChange} />
             </label>
             <p></p>
+            <label>Wind:
+          <select name="Wind" value={this.state.Wind} 
+            className="form-control form-center" onChange={this.handleChange}>
+            <option value="Calm">Calm</option>
+            <option value="Light">Light</option>
+            <option value="Moderate">Moderate</option>
+            <option value="Strong">Strong</option>
+          </select> 
+          </label>
+          <label>Weather:
+          <select name="Weather" value={this.state.Weather} 
+            className="form-control form-center" onChange={this.handleChange}>
+            <option value="Clear">Clear</option>
+            <option value="Partly Cloudy">Partly Cloudy</option>
+            <option value="Mostly Cloudy">Mostly Cloudy</option>
+            <option value="Cloudy">Cloudy</option>
+            <option value="Light Rain">Light Rain</option>
+            <option value="Rain">Rain</option>
+            <option value="Heavy Rain">Heavy Rain</option>
+            <option value="Light Snow">Light Snow</option>
+            <option value="Snow">Snow</option>
+            <option value="Heavy Snow">Heavy Snow</option>
+          </select> 
+          </label>
+            <p></p>
             <label>
               Course:
               <input name="course" className="form-control form-center" type="text"
@@ -101,10 +131,28 @@ class RoundForm extends React.Component {
           <label>Type:
           <select name="type" value={this.state.type} 
             className="form-control form-center" onChange={this.handleChange}>
-            <option value="practice">Practice</option>
-            <option value="tournament">Tournament</option>
+            <option value="Practice">Practice</option>
+            <option value="Tournament">Tournament</option>
+            <option value="League">League</option>
           </select> 
           </label>
+          <p></p>
+          <label># Fairways:
+          <input name="Fairways" className="form-control form-center" type="number" 
+            min="1" max="999" value={this.state.Fairways} 
+            onChange={this.handleChange} /> 
+          </label>
+          <p></p>
+          <label># Greens:
+          <input name="Greens" className="form-control form-center" type="number" 
+            min="1" max="999" value={this.state.Greens} 
+            onChange={this.handleChange} />
+          </label>
+          <label># putt:
+          <input name="putt" className="form-control form-center" type="number" 
+            min="1" max="999" value={this.state.putt} 
+            onChange={this.handleChange} />
+          </label>                       
           <p></p>
           <label># Holes:
           <select name="holes" value={this.state.holes} 

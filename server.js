@@ -6,8 +6,6 @@
 import passport from 'passport';
 import passportGithub from 'passport-github'; 
 import passportLocal from 'passport-local';
-import passportGoogle from 'passport-google-oauth2';
-import passportFacebook from 'passport-facebook';
 import session from 'express-session';
 import regeneratorRuntime from "regenerator-runtime";
 import path from 'path';
@@ -20,8 +18,6 @@ const DEPLOY_URL = "http://localhost:8081";
 const PORT = process.env.HTTP_PORT || LOCAL_PORT;
 const GithubStrategy = passportGithub.Strategy;
 const LocalStrategy = passportLocal.Strategy;
-const GoogleStrategy = passportGoogle.Strategy;
-const FacebookStrategy = passportFacebook.Strategy;
 const app = express();
 
 const result = dotenv.config()
@@ -30,6 +26,7 @@ if (result.error) {
   throw result.error
 }
 
+console.log(result.parsed)
 
 //////////////////////////////////////////////////////////////////////////
 //MONGOOSE SET-UP
@@ -48,8 +45,21 @@ mongoose.connect(connectStr, {useNewUrlParser: true, useUnifiedTopology: true})
 const Schema = mongoose.Schema;
 const roundSchema = new Schema({
   date: {type: Date, required: true},
+  Wind: {
+    type: String,
+    required: true,
+    "enum": ['Calm', 'Light', 'Moderate', 'Strong']
+  },
+  Weather: {
+    type: String,
+    required: true,
+    "enum": ['Clear', 'Partly Cloudy', 'Mostly Cloudy', 'Cloudy', 'Light Rain', 'Rain', 'Heavy Rain', 'Light Snow', 'Snow', 'Heavy Snow']
+  },
   course: {type: String, required: true},
-  type: {type: String, required: true, enum: ['practice','tournament']},
+  type: {type: String, required: true, enum: ['Practice','Tournament', 'League']},
+  Fairways:{type: Number, required: true, min: 1, max: 999},
+  Greens:{type: Number, required: true, min: 1, max: 999},
+  putt:{type: Number, required: true, min: 1, max: 999},
   holes: {type: Number, required: true, min: 1, max: 18},
   strokes: {type: Number, required: true, min: 1, max: 300},
   minutes: {type: Number, required: true, min: 1, max: 240},
@@ -97,8 +107,6 @@ passport.use(new GithubStrategy({
   //The following function is called after user authenticates with github
   async (accessToken, refreshToken, profile, done) => {
     console.log("User authenticated through GitHub! In passport callback.");
-    //console.log(accessToken);
-    //console.log(refreshToken);
     //Our convention is to build userId from displayName and provider
     const userId = `${profile.username}@${profile.provider}`;
     //See if document with this unique userId exists in database 
@@ -114,63 +122,6 @@ passport.use(new GithubStrategy({
   }
   return done(null,currentUser);
 }));
-
-passport.use(new GoogleStrategy ({
-  clientID: process.env.GOOGLE_CLIENT_ID,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: DEPLOY_URL + "/auth/google/callback"
-},
-  //The following function is called after user authenticates with github
-  async (accessToken, refreshToken, profile, done) => {
-    console.log("User authenticated through Google! In passport callback.");
-    //console.log(accessToken);
-    //console.log(profile)
-    //Our convention is to build userId from displayName and provider
-    const userId = `${profile.given_name}_${profile.family_name}@${profile.provider}`;
-    //See if document with this unique userId exists in database 
-    let currentUser = await User.findOne({id: userId});
-    if (!currentUser) { //Add this user to the database
-        currentUser = await new User({
-        id: userId,
-        displayName: profile.displayName,
-        authStrategy: profile.provider,
-        profilePicURL: profile.photos[0].value,
-        rounds: []
-      }).save();
-  }
-  return done(null,currentUser);
-}));
-
-
-passport.use(new FacebookStrategy ({
-  clientID: process.env.FB_CLIENT_ID,
-  clientSecret: process.env.FB_CLIENT_SECRET,
-  callbackURL: DEPLOY_URL + "/auth/facebook/callback",
-  profileFields: ['id', 'displayName', 'photos', 'email']
-},
-  //The following function is called after user authenticates with github
-  async (accessToken, refreshToken, profile, done) => {
-    console.log("User authenticated through Facebook! In passport callback.");
-    //console.log(profile);
-    //console.log(accessToken);
-    const email = `${profile._json.email}`
-    const emailId = email.split('@')
-    //Our convention is to build userId from displayName and provider
-    const userId = `${emailId[0]}@${profile.provider}`;
-    //See if document with this unique userId exists in database 
-    let currentUser = await User.findOne({id: userId});
-    if (!currentUser) { //Add this user to the database
-        currentUser = await new User({
-        id: userId,
-        displayName: profile.displayName,
-        authStrategy: profile.provider,
-        profilePicURL: profile.photos[0].value,
-        rounds: []
-      }).save();
-  }
-  return done(null,currentUser);
-}));
-
 
 passport.use(new LocalStrategy({passReqToCallback: true},
   //Called when user is attempting to log in with local username and password. 
@@ -232,7 +183,7 @@ app
   .use(session({secret: "speedgolf", 
                 resave: false,
                 saveUninitialized: false,
-                cookie: {maxAge: 1000 * 60 * 60}}))
+                cookie: {maxAge: 1000 * 60}}))
   .use(express.static(path.join(__dirname,"client/build")))
   .use(passport.initialize())
   .use(passport.session())
@@ -252,10 +203,6 @@ app
 //Log In page.
 app.get('/auth/github', passport.authenticate('github'));
 
-app.get('/auth/google', passport.authenticate('google', {scope: ['profile']}));
-
-app.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email']}));
-
 //CALLBACK route:  GitHub will call this route after the
 //OAuth authentication process is complete.
 //req.isAuthenticated() tells us whether authentication was successful.
@@ -266,18 +213,6 @@ app.get('/auth/github/callback', passport.authenticate('github', { failureRedire
                        //req.isAuthenticated() indicates status
   }
 );
-
-app.get('/auth/google/callback', passport.authenticate('google', { scope: ['profile'], failureRedirect: '/'}),
-  (req,res) => {
-    console.log("auth/google/callback reached.");
-    res.redirect('/');
-  });
-
-app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/'}),
-  (req,res) => {
-    console.log("auth/facebook/callback reached.");
-    res.redirect('/');
-  });
 
 //LOGOUT route: Use passport's req.logout() method to log the user out and
 //redirect the user to the main app page. req.isAuthenticated() is toggled to false.
@@ -445,8 +380,13 @@ app.post('/rounds/:userId', async (req, res, next) => {
               JSON.stringify(req.params) + " and body = " + 
               JSON.stringify(req.body));
   if (!req.body.hasOwnProperty("date") || 
+      !req.body.hasOwnProperty("Wind")|| 
+      !req.body.hasOwnProperty("Weather")||
       !req.body.hasOwnProperty("course") || 
       !req.body.hasOwnProperty("type") ||
+      !req.body.hasOwnProperty("Fairways") ||
+      !req.body.hasOwnProperty("Greens") || 
+      !req.body.hasOwnProperty("putt") ||
       !req.body.hasOwnProperty("holes") || 
       !req.body.hasOwnProperty("strokes") ||
       !req.body.hasOwnProperty("minutes") ||
@@ -454,7 +394,7 @@ app.post('/rounds/:userId', async (req, res, next) => {
       !req.body.hasOwnProperty("notes")) {
     //Body does not contain correct properties
     return res.status(400).send("POST request on /rounds formulated incorrectly." +
-      "Body must contain all 8 required fields: date, course, type, holes, strokes, "       +  "minutes, seconds, notes.");
+      "Body must contain all 8 required fields: date, Wind,Weather,course, type,Fairways, Greens,putt, holes, strokes, "       +  "minutes, seconds, notes.");
   }
   try {
     let status = await User.updateOne(
@@ -497,7 +437,7 @@ app.put('/rounds/:userId/:roundId', async (req, res, next) => {
   console.log("in /rounds (PUT) route with params = " + 
               JSON.stringify(req.params) + " and body = " + 
               JSON.stringify(req.body));
-  const validProps = ['date', 'course', 'type', 'holes', 'strokes',
+  const validProps = ['date','Wind','Weather', 'course', 'type','Fairways', 'Greens', 'putt','holes', 'strokes',
     'minutes', 'seconds', 'notes'];
   let bodyObj = {...req.body};
   delete bodyObj._id; //Not needed for update
@@ -506,7 +446,7 @@ app.put('/rounds/:userId/:roundId', async (req, res, next) => {
     if (!validProps.includes(bodyProp)) {
       return res.status(400).send("rounds/ PUT request formulated incorrectly." +
         "It includes " + bodyProp + ". However, only the following props are allowed: " +
-        "'date', 'course', 'type', 'holes', 'strokes', " +
+        "'date', 'Wind','Weather','course', 'type', 'Fairways', 'Greens','putt','holes', 'strokes', " +
         "'minutes', 'seconds', 'notes'");
     } else {
       bodyObj["rounds.$." + bodyProp] = bodyObj[bodyProp];

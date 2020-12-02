@@ -21,12 +21,11 @@ class CreateEditAccountDialog extends React.Component {
                       firstName: "",
                       lastName: "",
                       hometown: "",
-                      bday: "",
+                      bday: today.toISOString().substr(0,10),
                       handicap: "",
                       homeCourse: "",
-                      firstRoundDate: "",
+                      firstRoundDate: today.toISOString().substr(0,10),
                       km5: "",
-                      firstName: "",
                       prStats: "",
                       clubs: "",
                       formUpdated: false,
@@ -397,6 +396,67 @@ class CreateEditAccountDialog extends React.Component {
                  />
              </label>
              <br></br>
+             <label>
+                 Birthday:
+                 <textarea
+                 id="bday"
+                 className="form-control form-text form-center"
+                 name="bday"
+                 type="date"
+                 required={false}
+                 value={this.state.bday}
+                 onChange={this.handleChange}
+                 />
+             </label>
+             <br></br>
+             <label>
+                 Golf Handicap:
+                 <textarea
+                 id="handicap"
+                 className="form-control form-text form-center"
+                 name="handicap"
+                 type="text"
+                 placeholder="Seattle"
+                 rows="2"
+                 cols="35"
+                 maxLength="60"
+                 required={false}
+                 value={this.state.handicap}
+                 onChange={this.handleChange}
+                 />
+             </label>
+             <br></br>
+             <label>
+                 Home Course:
+                 <textarea
+                 id="homeCourse"
+                 className="form-control form-text form-center"
+                 name="homeCourse"
+                 type="text"
+                 placeholder="Seattle's Speedgolf"
+                 rows="2"
+                 cols="35"
+                 maxLength="30"
+                 required={false}
+                 value={this.state.homeCourse}
+                 onChange={this.handleChange}
+                 />
+             </label>
+             <br></br>
+             <label>
+                 Date of First Speedgolf Round:
+                 <textarea
+                 id="firstRoundDate"
+                 className="form-control form-text form-center"
+                 name="firstRoundDate"
+                 type="date"
+                 required={false}
+                 value={this.state.firstRoundDate}
+                 onChange={this.handleChange}
+                 />
+             </label>
+             <br></br>
+             
 
              </div> 
              

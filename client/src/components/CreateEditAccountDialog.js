@@ -344,7 +344,8 @@ class CreateEditAccountDialog extends React.Component {
                 />
             </label>
             <br/>
-            {this.props.create ? null : 
+            {this.props.create ? null :
+            <div>
              <label>
                  First Name:
                  <textarea
@@ -352,17 +353,54 @@ class CreateEditAccountDialog extends React.Component {
                  className="form-control form-text form-center"
                  name="firstName"
                  type="text"
-                 placeholder="Name"
+                 placeholder="First Name"
                  rows="2"
                  cols="35"
                  maxLength="30"
                  required={false}
-                 value={this.state.securityAnswer}
+                 value={this.state.firstName}
                  onChange={this.handleChange}
                  />
              </label>
+             <br></br>
+             <label>
+                 Last Name:
+                 <textarea
+                 id="lastName"
+                 className="form-control form-text form-center"
+                 name="lastName"
+                 type="text"
+                 placeholder="Last Name"
+                 rows="2"
+                 cols="35"
+                 maxLength="30"
+                 required={false}
+                 value={this.state.lastName}
+                 onChange={this.handleChange}
+                 />
+             </label>
+             <br></br>
+             <label>
+                 Hometown:
+                 <textarea
+                 id="hometown"
+                 className="form-control form-text form-center"
+                 name="hometown"
+                 type="text"
+                 placeholder="Seattle"
+                 rows="2"
+                 cols="35"
+                 maxLength="30"
+                 required={false}
+                 value={this.state.hometown}
+                 onChange={this.handleChange}
+                 />
+             </label>
+             <br></br>
+
+             </div> 
+             
             }
-            <br/><br/>
             {!this.props.create ?  
             <button className="btn btn-small btn-danger" onClick={this.confirmDeleteAccount}>
                 Delete Account...

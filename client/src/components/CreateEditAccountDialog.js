@@ -11,6 +11,8 @@ class CreateEditAccountDialog extends React.Component {
         this.newUserRef = React.createRef();
         this.repeatPassRef = React.createRef();
         this.profilePicRef = React.createRef();
+        //Create date object for today for filing in the date times
+        let today = new Date(Date.now()-(new Date()).getTimezoneOffset()*60000);
         this.state = {accountName: "",
                       displayName: "",
                       profilePicURL: "https://icon-library.net//images/default-profile-icon/default-profile-icon-24.jpg",

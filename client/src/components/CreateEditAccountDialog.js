@@ -18,6 +18,17 @@ class CreateEditAccountDialog extends React.Component {
                       passwordRepeat: "",
                       securityQuestion: "",
                       securityAnswer: "",
+                      firstName: "",
+                      lastName: "",
+                      hometown: "",
+                      bday: "",
+                      handicap: "",
+                      homeCourse: "",
+                      firstRoundDate: "",
+                      km5: "",
+                      firstName: "",
+                      prStats: "",
+                      clubs: "",
                       formUpdated: false,
                       confirmDelete: false};
     } 
@@ -333,6 +344,25 @@ class CreateEditAccountDialog extends React.Component {
                 />
             </label>
             <br/>
+            {this.props.create ? null : 
+             <label>
+                 First Name:
+                 <textarea
+                 id="firstName"
+                 className="form-control form-text form-center"
+                 name="firstName"
+                 type="text"
+                 placeholder="Name"
+                 rows="2"
+                 cols="35"
+                 maxLength="30"
+                 required={false}
+                 value={this.state.securityAnswer}
+                 onChange={this.handleChange}
+                 />
+             </label>
+            }
+            <br/><br/>
             {!this.props.create ?  
             <button className="btn btn-small btn-danger" onClick={this.confirmDeleteAccount}>
                 Delete Account...

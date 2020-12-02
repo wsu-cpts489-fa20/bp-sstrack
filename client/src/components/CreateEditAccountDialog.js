@@ -11,7 +11,7 @@ class CreateEditAccountDialog extends React.Component {
         this.newUserRef = React.createRef();
         this.repeatPassRef = React.createRef();
         this.profilePicRef = React.createRef();
-        //Create date object for today for filing in the date times
+        //Create date object for today for filing in the date
         let today = new Date(Date.now()-(new Date()).getTimezoneOffset()*60000);
         this.state = {accountName: "",
                       displayName: "",
@@ -27,8 +27,11 @@ class CreateEditAccountDialog extends React.Component {
                       handicap: "",
                       homeCourse: "",
                       firstRoundDate: today.toISOString().substr(0,10),
-                      km5: "",
-                      prStats: "",
+                      kmin: 0,
+                      ksec: 0,
+                      smin: "",
+                      ssec: "",
+                      sstrokes: "18",
                       clubs: "",
                       formUpdated: false,
                       confirmDelete: false};
@@ -400,7 +403,7 @@ class CreateEditAccountDialog extends React.Component {
              <br></br>
              <label>
                  Birthday:
-                 <textarea
+                 <input
                  id="bday"
                  className="form-control form-text form-center"
                  name="bday"
@@ -418,7 +421,7 @@ class CreateEditAccountDialog extends React.Component {
                  className="form-control form-text form-center"
                  name="handicap"
                  type="text"
-                 placeholder="Seattle"
+                 placeholder="Handicap requirments"
                  rows="2"
                  cols="35"
                  maxLength="60"
@@ -446,19 +449,34 @@ class CreateEditAccountDialog extends React.Component {
              </label>
              <br></br>
              <label>
-                 Date of First Speedgolf Round:
-                 <textarea
-                 id="firstRoundDate"
-                 className="form-control form-text form-center"
-                 name="firstRoundDate"
-                 type="date"
-                 required={false}
-                 value={this.state.firstRoundDate}
-                 onChange={this.handleChange}
-                 />
-             </label>
+                Best 5km:
+                <br></br>
+                <input name="kmin" type="number" size="3"
+                min="0" max="400" value={this.state.kmin}
+                onChange={this.handleChange} />:  
+                <input name="ksec" type="number" size="2"
+                min="0" max="60" value={this.state.ksec} 
+                onChange={this.handleChange} /> 
+            </label>
              <br></br>
-             
+             <label>
+                Best Speedgolf Stats:
+                <br></br>
+                Strokes:
+                <br></br>
+                <input name="sstrokes" className="form-center" type="text" size="6" 
+                disabled={true} value={this.state.sstrokes} />
+                <br></br>
+                Time:
+                <br></br>
+                <input name="smin" type="number" size="3"
+                min="0" max="400" value={this.state.smin}
+                onChange={this.handleChange} />:  
+                <input name="ssec" type="number" size="2"
+                min="0" max="60" value={this.state.ssec} 
+                onChange={this.handleChange} /> 
+            </label>
+             <br></br>
 
              </div> 
              

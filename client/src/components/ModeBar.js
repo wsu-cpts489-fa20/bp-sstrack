@@ -12,7 +12,7 @@ class ModeBar extends React.Component {
           <span className="modebaricon fa fa-th-list"></span>
           <span className="modebar-text">Feed</span>
         </a>
-        <a className={(this.props.mode === AppMode.ROUNDS || 
+        <a id="roundsMode" className={(this.props.mode === AppMode.ROUNDS || 
                this.props.mode === AppMode.ROUNDS_EDITROUND || 
                this.props.mode === AppMode.ROUNDS_LOGROUND ? 
                   " item-selected" : null)}

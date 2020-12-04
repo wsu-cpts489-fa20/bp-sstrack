@@ -256,6 +256,7 @@ class CreateEditAccountDialog extends React.Component {
             <label>
                 Email: 
                 <input  
+                id="email"
                 autocomplete="off"
                 disabled={!this.props.create}
                 className="form-control form-text form-center"
@@ -276,6 +277,7 @@ class CreateEditAccountDialog extends React.Component {
                 Password:
                 <input
                 autocomplete="off"
+                id="password"
                 className="form-control form-text form-center"
                 name="password"
                 type="password"
@@ -292,6 +294,7 @@ class CreateEditAccountDialog extends React.Component {
             <label>
                 Repeat Password:
                 <input
+                id="passwordR"
                 className="form-control form-text form-center"
                 name="passwordRepeat"
                 type="password"
@@ -307,6 +310,7 @@ class CreateEditAccountDialog extends React.Component {
             <label>
                 Display Name:
                 <input
+                id="displayName"
                 className="form-control form-text form-center"
                 name="displayName"
                 type="text"
@@ -339,6 +343,7 @@ class CreateEditAccountDialog extends React.Component {
             <label>
                 Security Question:
                 <textarea
+                id="securityQ"
                 className="form-control form-text form-center"
                 name="securityQuestion"
                 size="35"
@@ -355,6 +360,7 @@ class CreateEditAccountDialog extends React.Component {
             <label>
                 Answer to Security Question:
                 <textarea
+                id="securityQAnswer"
                 className="form-control form-text form-center"
                 name="securityAnswer"
                 type="text"
@@ -370,7 +376,7 @@ class CreateEditAccountDialog extends React.Component {
             <br/>
             {this.props.create ? null :
             <div>
-             <label>
+             <label id="firstNameBox">
                  First Name:
                  <textarea
                  id="firstName"
@@ -387,7 +393,7 @@ class CreateEditAccountDialog extends React.Component {
                  />
              </label>
              <br></br>
-             <label>
+             <label id="lastNameBox">
                  Last Name:
                  <textarea
                  id="lastName"
@@ -404,7 +410,7 @@ class CreateEditAccountDialog extends React.Component {
                  />
              </label>
              <br></br>
-             <label>
+             <label id="hometownBox">
                  Hometown:
                  <textarea
                  id="hometown"
@@ -421,7 +427,7 @@ class CreateEditAccountDialog extends React.Component {
                  />
              </label>
              <br></br>
-             <label>
+             <label id="birthdayBox">
                  Birthday:
                  <input
                  id="bday"
@@ -434,7 +440,7 @@ class CreateEditAccountDialog extends React.Component {
                  />
              </label>
              <br></br>
-             <label>
+             <label id="handicapBox">
                  Golf Handicap:
                  <textarea
                  id="handicap"
@@ -451,7 +457,7 @@ class CreateEditAccountDialog extends React.Component {
                  />
              </label>
              <br></br>
-             <label>
+             <label id="firstRoundBox">
                  First Speedgolf Round:
                  <input
                  id="firstRoundDate"
@@ -464,7 +470,7 @@ class CreateEditAccountDialog extends React.Component {
                  />
              </label>
              <br></br>
-             <label>
+             <label id="homeCourseBox">
                  Home Course:
                  <textarea
                  id="homeCourse"
@@ -481,7 +487,7 @@ class CreateEditAccountDialog extends React.Component {
                  />
              </label>
              <br></br>
-             <label>
+             <label id="best5kBox">
                 Best 5km:
                 <br></br>
                 <input name="kmin" type="number" size="3"
@@ -492,7 +498,7 @@ class CreateEditAccountDialog extends React.Component {
                 onChange={this.handleChange} /> 
             </label>
              <br></br>
-             <label>
+             <label id="statsBox">
                 Best Speedgolf Stats:
                 <br></br>
                 Strokes:
@@ -521,6 +527,7 @@ class CreateEditAccountDialog extends React.Component {
             <br/><br/>
             <button role="submit" 
                 disabled={!this.state.formUpdated}
+                id="submitCreateOrUpdate"
                 className="btn btn-primary btn-color-theme modal-submit-btn">
                 <span className={this.props.create ? "fa fa-user-plus" : "fa fa-user"}></span>
                 &nbsp;{this.props.create ? "Create Account" : "Update Account"}

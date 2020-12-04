@@ -30,6 +30,22 @@ test('Login Github', async t => {
     .expect('ok').ok('this assertion will pass')
 });
 
+test('Login Google', async t => {
+    await t 
+    .click('#googleBtn')
+    // Dont want to expose credentials
+    //.expect(Selector('#feedPage').visible).eql(true)
+    .expect('ok').ok('this assertion will pass')
+});
+
+test('Login Facebook', async t => {
+    await t 
+    .click('#facebookBtn')
+    // Dont want to expose credentials
+    //.expect(Selector('#feedPage').visible).eql(true)
+    .expect('ok').ok('this assertion will pass')
+});
+
 test('Create account', async t => {
     // Vars to init the test
     const username = "test";
@@ -59,4 +75,46 @@ test('Create account', async t => {
 
         .click("#submitCreateOrUpdate")
 
+})
+
+test('Edit Account', async t => {
+    const email = 'connorsNewAccount@live.com';
+    const pw = '12345ASDf';
+    const emailInput = Selector('#emailInput');
+    const passwordInput = Selector('#passwordInput');
+
+    await t
+        // Enters text
+        .typeText(emailInput, email)
+        .typeText(passwordInput,pw)
+        // Checks expected input
+        .expect(emailInput.value).eql(email)
+        .expect(passwordInput.value).eql(pw)
+        .click('#loginBtn')
+        .expect(Selector('#feedPage').visible).eql(true)
+        .click('#menuBtnIcon')
+        .click('#accountBtn')
+        .expect(Selector('#firstNameBox').visible).eql(true)
+})
+
+
+test('Log New Round', async t => {
+    const email = 'connorsNewAccount@live.com';
+    const pw = '12345ASDf';
+    const emailInput = Selector('#emailInput');
+    const passwordInput = Selector('#passwordInput');
+
+
+    await t
+    // Enters text
+    .typeText(emailInput, email)
+    .typeText(passwordInput,pw)
+    // Checks expected input
+    .expect(emailInput.value).eql(email)
+    .expect(passwordInput.value).eql(pw)
+    .click('#loginBtn')
+    .expect(Selector('#feedPage').visible).eql(true)
+    .click('#roundsMode')
+    .click('#floatBtn')
+    .expect(Selector('#coursesDropDown').visible).eql(true)
 })

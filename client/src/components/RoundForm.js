@@ -122,7 +122,7 @@ class RoundForm extends React.Component {
           </label>
             <p></p>
             <label>Course:
-          <select name="player" value={this.state.player} 
+          <select id="coursesDropDown" name="player" value={this.state.player} 
             className="form-control form-center" onChange={this.handleChange}>
             <option value="ab (sw)">ab (sw)</option>
             <option value="Albert Park Golf Course (Melbourne, Australia)">Albert Park Golf Course (Melbourne, Australia)</option>

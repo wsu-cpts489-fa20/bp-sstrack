@@ -55,7 +55,11 @@ const roundSchema = new Schema({
     required: true,
     "enum": ['Clear', 'Partly Cloudy', 'Mostly Cloudy', 'Cloudy', 'Light Rain', 'Rain', 'Heavy Rain', 'Light Snow', 'Snow', 'Heavy Snow']
   },
-  course: {type: String, required: true},
+  player:{
+    type: String,
+    required: true,
+    "enum": ['ab (sw)', 'Albert Park Golf Course (Melbourne, Australia)', 'Arrowhead Golf Club Blue (Molalla, OR)', 'Bing Maloney Golf Course Red (Sacramento, CA)','Bing Maloney Golf Course White (Sacramento, CA)','Blackhorse Golf Club - South Course Blue (Cypress, TX)','Blackhorse Golf Club - South Course Red (Cypress, TX)','Blackhorse Golf Club - South Course White (Cypress, TX)','Bryden Canyon Golf Course White (Lewiston, ID)','Cascata Golf Course White (Boulder City, Nevada)','Esmeralda Golf Course White (Spokane, WA, USA)','Glenoaks Golf & Country Club Mens Blue (Prospect KY)','Glenoaks Golf & Country Club Seniors White (Prospect, KY)','Glenoaks Golf & Country Club Womens Red (Prospect, KY)','Horton Smith Golf Course Blue (Springfield, MO)','Horton Smith Golf Course Red (Springfield, MO)','Horton Smith Golf Course White (Springfield, MO)','Meriwether National Golf Club White (Hillsboro, OR)','Mountain Top Golf Course Back (Hollister, MO)','Oneway Golf Club Ladies (Tsuchiura, Ibaraki, Japan)']
+  },
   type: {type: String, required: true, enum: ['Practice','Tournament', 'League']},
   Fairways:{type: Number, required: true, min: 1, max: 999},
   Greens:{type: Number, required: true, min: 1, max: 999},
@@ -382,7 +386,7 @@ app.post('/rounds/:userId', async (req, res, next) => {
   if (!req.body.hasOwnProperty("date") || 
       !req.body.hasOwnProperty("Wind")|| 
       !req.body.hasOwnProperty("Weather")||
-      !req.body.hasOwnProperty("course") || 
+      !req.body.hasOwnProperty("player")|| 
       !req.body.hasOwnProperty("type") ||
       !req.body.hasOwnProperty("Fairways") ||
       !req.body.hasOwnProperty("Greens") || 
@@ -394,7 +398,7 @@ app.post('/rounds/:userId', async (req, res, next) => {
       !req.body.hasOwnProperty("notes")) {
     //Body does not contain correct properties
     return res.status(400).send("POST request on /rounds formulated incorrectly." +
-      "Body must contain all 8 required fields: date, Wind,Weather,course, type,Fairways, Greens,putt, holes, strokes, "       +  "minutes, seconds, notes.");
+      "Body must contain all 8 required fields: date,player, Wind,Weather, type,Fairways, Greens,putt, holes, strokes, "       +  "minutes, seconds, notes.");
   }
   try {
     let status = await User.updateOne(
@@ -437,7 +441,7 @@ app.put('/rounds/:userId/:roundId', async (req, res, next) => {
   console.log("in /rounds (PUT) route with params = " + 
               JSON.stringify(req.params) + " and body = " + 
               JSON.stringify(req.body));
-  const validProps = ['date','Wind','Weather', 'course', 'type','Fairways', 'Greens', 'putt','holes', 'strokes',
+  const validProps = ['date','player','Wind','Weather', 'type','Fairways', 'Greens', 'putt','holes', 'strokes',
     'minutes', 'seconds', 'notes'];
   let bodyObj = {...req.body};
   delete bodyObj._id; //Not needed for update
@@ -446,7 +450,7 @@ app.put('/rounds/:userId/:roundId', async (req, res, next) => {
     if (!validProps.includes(bodyProp)) {
       return res.status(400).send("rounds/ PUT request formulated incorrectly." +
         "It includes " + bodyProp + ". However, only the following props are allowed: " +
-        "'date', 'Wind','Weather','course', 'type', 'Fairways', 'Greens','putt','holes', 'strokes', " +
+        "'date', 'player','Wind','Weather', 'type', 'Fairways', 'Greens','putt','holes', 'strokes', " +
         "'minutes', 'seconds', 'notes'");
     } else {
       bodyObj["rounds.$." + bodyProp] = bodyObj[bodyProp];

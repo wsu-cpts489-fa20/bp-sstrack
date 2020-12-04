@@ -140,7 +140,47 @@ var userSchema = new Schema({
       return this.securityQuestion ? true : false;
     }
   },
-  rounds: [roundSchema]
+  rounds: [roundSchema],
+  // adding in more user fields that are not required
+  firstName: String,
+  lastName: String,
+  hometown: String,
+  bday: {
+    type: Date,
+    required: false
+  },
+  handicap: String,
+  homeCourse: String,
+  firstRoundDate: {
+    type: Date,
+    required: false
+  },
+  kmin: {
+    type: Number,
+    required: false,
+    min: 0,
+    max: 400
+  },
+  ksec: {
+    type: Number,
+    required: false,
+    min: 0,
+    max: 60
+  },
+  smin: {
+    type: Number,
+    required: false,
+    min: 0,
+    max: 400
+  },
+  ssec: {
+    type: Number,
+    required: false,
+    min: 0,
+    max: 60
+  },
+  sstrokes: String //clubs: String
+
 });
 
 var User = _mongoose["default"].model("User", userSchema); //////////////////////////////////////////////////////////////////////////
@@ -657,7 +697,21 @@ app.post('/users/:userId', /*#__PURE__*/function () {
               profilePicURL: req.body.profilePicURL,
               securityQuestion: req.body.securityQuestion,
               securityAnswer: req.body.securityAnswer,
-              rounds: []
+              rounds: [],
+              // adding in more user fields that are not required
+              firstName: "",
+              lastName: "",
+              hometown: "",
+              bday: new Date(0),
+              handicap: "",
+              homeCourse: "",
+              firstRoundDate: new Date(0),
+              kmin: 0,
+              ksec: 0,
+              smin: 0,
+              ssec: 0,
+              sstrokes: "18" //clubs: ""
+
             }).save();
 
           case 13:
@@ -703,7 +757,7 @@ app.put('/users/:userId', /*#__PURE__*/function () {
             return _context8.abrupt("return", res.status(400).send("users/ PUT request formulated incorrectly." + "It must contain 'userId' as parameter."));
 
           case 3:
-            validProps = ['password', 'displayName', 'profilePicURL', 'securityQuestion', 'securityAnswer'];
+            validProps = ['password', 'displayName', 'profilePicURL', 'securityQuestion', 'securityAnswer', 'firstName', 'lastName', 'hometown', 'bday', 'handicap', 'homeCourse', 'firstRoundDate', 'kmin', 'ksec', 'smin', 'ssec', 'sstrokes'];
             _context8.t0 = _regeneratorRuntime["default"].keys(req.body);
 
           case 5:

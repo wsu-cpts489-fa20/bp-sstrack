@@ -85,10 +85,10 @@ const userSchema = new Schema({
   firstName: String,
   lastName: String, 
   hometown: String,  
-  bday: {type: Date, required= false},
+  bday: {type: Date, required: false},
   handicap: String,  
   homeCourse: String,  
-  firstRoundDate: {type: Date, required= false},
+  firstRoundDate: {type: Date, required: false},
   kmin : {type: Number, required: false, min: 0, max: 400},
   ksec : {type: Number, required: false, min: 0, max: 60},
   smin : {type: Number, required: false, min: 0, max: 400},
@@ -375,7 +375,9 @@ app.post('/users/:userId',  async (req, res, next) => {
       "It must contain 'password','displayName','profilePicURL','securityQuestion' and 'securityAnswer fields in message body.")
   }
   try {
+    console.log("looking for this user")
     let thisUser = await User.findOne({id: req.params.userId});
+    console.log("grabed this user")
     if (thisUser) { //account already exists
       res.status(400).send("There is already an account with email '" + 
         req.params.userId + "'.");

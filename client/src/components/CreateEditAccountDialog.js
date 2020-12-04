@@ -151,8 +151,21 @@ class CreateEditAccountDialog extends React.Component {
             password: this.state.password,
             profilePicURL: this.state.profilePicURL,
             securityQuestion: this.state.securityQuestion,
-            securityAnswer: this.state.securityAnswer
+            securityAnswer: this.state.securityAnswer,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            hometown: this.state.hometown,
+            bday: this.state.bday,
+            handicap: this.state.handicap,
+            homeCourse: this.state.homeCourse,
+            firstRoundDate: this.state.firstRoundDate,
+            kmin: this.state.kmin,
+            ksec: this.state.ksec,
+            smin: this.state.smin,
+            ssec: this.state.ssec,
+            sstrokes: this.state.sstrokes,
         };
+                      
         const url = '/users/' + this.state.accountName;
         let res;
         if (this.props.create) { //use POST route to create new user account

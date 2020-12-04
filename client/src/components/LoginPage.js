@@ -22,10 +22,6 @@ constructor() {
                   showResetPaswordDialog: false,
                   githubIcon: "fa fa-github",
                   githubLabel: "Sign in with GitHub",
-                  googleIcon: "fa fa-google",
-                  googleLabel: "Sign in with Google",
-                  facebookIcon: "fa fa-facebook",
-                  facebookLabel: "Sign in with Facebook",
                   loginMsg: "",
                   newAccountCreated: false
                   };
@@ -156,7 +152,7 @@ cancelCreateAccount = () => {
 
   render() {
     return(
-        <div id="loginDiv">
+        <div>
         <center>
         {this.state.statusMsg != "" ? <div className="status-msg"><span>{this.state.statusMsg}</span>
                        <button className="modal-close" onClick={this.closeStatusMsg}>
@@ -194,20 +190,19 @@ cancelCreateAccount = () => {
                 className="form-control login-text"
                 type="password"
                 placeholder="Enter Password"
-                id="passwordInput"
                 pattern="[A-Za-z0-9!@#$%^&*()_+\-]+"
                 required={true}
                 />
             </label>
             <p className="bg-danger" id="feedback" style={{ fontSize: 16 }} />
-            <button id="loginBtn"
+            <button
                 type="submit"
                 className="btn-color-theme btn btn-primary btn-block login-btn">
                 <span id="login-btn-icon" className={this.state.loginBtnIcon}/>
                 &nbsp;{this.state.loginBtnLabel}
             </button>
             <p>
-            <button id="createAccount" type="button" className="btn btn-link login-link" 
+            <button type="button" className="btn btn-link login-link" 
                     onClick={() => {this.setState({showCreateAccountDialog: true});}}>
                 Create an account</button> | 
                 <button type="button" className="btn btn-link login-link"
@@ -216,19 +211,8 @@ cancelCreateAccount = () => {
             </p>  
             <button type="button" className="btn btn-github"
                onClick={() => this.handleOAuthLoginClick("github")}>
-              <span id="gitHubBtn" className={this.state.githubIcon}></span>&nbsp;
+              <span className={this.state.githubIcon}></span>&nbsp;
                 {this.state.githubLabel}
-            </button>
-            <button type="button" className="btn btn-google" 
-                onClick={() => this.handleOAuthLoginClick("google")}>
-                <span className={this.state.googleIcon}></span>&nbsp;
-                    {this.state.googleLabel}
-            </button>
-
-            <button type="button" className="btn btn-facebook" 
-                onClick={() => this.handleOAuthLoginClick("facebook")}>
-                <span className={this.state.facebookIcon}></span>&nbsp;
-                    {this.state.facebookLabel}
             </button>
             <p>
                 <i>Version CptS 489</i>

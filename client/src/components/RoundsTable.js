@@ -47,7 +47,10 @@ class RoundsTable extends React.Component {
     table.push(
       <tr key={r}>
         <td>{this.props.rounds[r].date.substring(0,10)}</td>
-        <td>{this.props.rounds[r].course}</td>
+        <td>{this.props.rounds[r].Wind + "/" + this.props.rounds[r].Weather}</td>        
+        <td>{this.props.rounds[r].player}</td>
+        <td>{(Number(this.props.rounds[r].Fairways) +"/" + Number(this.props.rounds[r].Greens)+ "(" +Number(this.props.rounds[r].putt)+")" ) }</td>
+        <td>{this.props.rounds[r].type}</td>
         <td>{(Number(this.props.rounds[r].strokes) + 
               Number(this.props.rounds[r].minutes)) +
               ":" + (this.props.rounds[r].seconds < 10 ?  
@@ -81,7 +84,10 @@ class RoundsTable extends React.Component {
         <thead className="thead-light">
         <tr>
           <th>Date</th>
+          <th>Wind/Weather</th>
           <th>Course</th>
+          <th>Fairway/Greens(Putt)</th>
+          <th>Type</th>
           <th>Score</th>
           <th>View/Edit...</th>
           <th>Delete</th>

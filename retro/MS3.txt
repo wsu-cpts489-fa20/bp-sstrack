@@ -1,0 +1,16 @@
+A.
+For our MS3, there is a lot more progress towards our project after meeting with Dr. H.
+What has improved and is going well is our team communication, team contribution, and team communication.
+This is a great stepping stone as previously we had many issues with the above.
+
+B.
+Currently, there are a few things that are not going to well. One of them is getting the project
+deployed through AWS. We are having difficulties on getting this part complete. Another issue we
+all are facing right now is time managment. We all are having a slight issue trying to contribute 
+more to the project, as everyone is having tons of deliverables, exams, and presentations this and next week.
+
+C.
+Some ways to help improve these issues is by reaching out to Dr. H and asking for more input on 
+deploying the project to AWS. For the time management it is harder to acheive as we are limited
+as we are getting towards the end of the semester. What we are plannig is to continue working hard
+over the weekend to make more availability next week.

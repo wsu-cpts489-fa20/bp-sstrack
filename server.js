@@ -80,7 +80,21 @@ const userSchema = new Schema({
   securityQuestion: String,
   securityAnswer: {type: String, required: function() 
     {return this.securityQuestion ? true: false}},
-  rounds: [roundSchema]
+  rounds: [roundSchema],
+  // adding in more user fields that are not required
+  firstName: String,
+  lastName: String, 
+  hometown: String,  
+  bday: {type: Date, required= false},
+  handicap: String,  
+  homeCourse: String,  
+  firstRoundDate: {type: Date, required= false},
+  kmin : {type: Number, required: false, min: 0, max: 400},
+  ksec : {type: Number, required: false, min: 0, max: 60},
+  smin : {type: Number, required: false, min: 0, max: 400},
+  ssec : {type: Number, required: false, min: 0, max: 60},
+  sstrokes: String, 
+  //clubs: String
 });
 const User = mongoose.model("User",userSchema); 
 
@@ -374,7 +388,21 @@ app.post('/users/:userId',  async (req, res, next) => {
         profilePicURL: req.body.profilePicURL,
         securityQuestion: req.body.securityQuestion,
         securityAnswer: req.body.securityAnswer,
-        rounds: []
+        rounds: [],
+        // adding in more user fields that are not required
+        firstName: "",
+        lastName: "", 
+        hometown: "",  
+        bday: new Date(0),
+        handicap: "",  
+        homeCourse: "",  
+        firstRoundDate: new Date(0),
+        kmin : 0,
+        ksec : 0,
+        smin : 0,
+        ssec : 0,
+        sstrokes: "18", 
+        //clubs: ""
       }).save();
       return res.status(201).send("New account for '" + 
         req.params.userId + "' successfully created.");
@@ -393,7 +421,9 @@ app.put('/users/:userId',  async (req, res, next) => {
         "It must contain 'userId' as parameter.");
   }
   const validProps = ['password', 'displayName', 'profilePicURL', 
-    'securityQuestion', 'securityAnswer'];
+    'securityQuestion', 'securityAnswer', 'firstName', 'lastName', 
+    'hometown', 'bday','handicap', 'homeCourse', 'firstRoundDate',
+    'kmin', 'ksec','smin','ssec','sstrokes'];
   for (const bodyProp in req.body) {
     if (!validProps.includes(bodyProp)) {
       return res.status(400).send("users/ PUT request formulated incorrectly." +

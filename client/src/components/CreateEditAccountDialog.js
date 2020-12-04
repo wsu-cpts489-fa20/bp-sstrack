@@ -29,10 +29,10 @@ class CreateEditAccountDialog extends React.Component {
                       firstRoundDate: today.toISOString().substr(0,10),
                       kmin: 0,
                       ksec: 0,
-                      smin: "",
-                      ssec: "",
+                      smin: 0,
+                      ssec: 0,
                       sstrokes: "18",
-                      clubs: "",
+                      //clubs: "",
                       formUpdated: false,
                       confirmDelete: false};
     } 

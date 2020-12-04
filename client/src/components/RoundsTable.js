@@ -48,7 +48,7 @@ class RoundsTable extends React.Component {
       <tr key={r}>
         <td>{this.props.rounds[r].date.substring(0,10)}</td>
         <td>{this.props.rounds[r].Wind + "/" + this.props.rounds[r].Weather}</td>        
-        <td>{this.props.rounds[r].course}</td>
+        <td>{this.props.rounds[r].player}</td>
         <td>{(Number(this.props.rounds[r].Fairways) +"/" + Number(this.props.rounds[r].Greens)+ "(" +Number(this.props.rounds[r].putt)+")" ) }</td>
         <td>{this.props.rounds[r].type}</td>
         <td>{(Number(this.props.rounds[r].strokes) + 

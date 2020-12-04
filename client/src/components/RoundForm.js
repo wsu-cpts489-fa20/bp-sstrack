@@ -12,8 +12,8 @@ class RoundForm extends React.Component {
     //today's date.
     this.state = {date:  today.toISOString().substr(0,10), 
                   Wind:"calm",
+                  player:"Course played",
                   Weather:"clear",
-                  course: "",
                   type: "practice",
                   Fairways: 1,
                   Greens: 1,
@@ -121,12 +121,31 @@ class RoundForm extends React.Component {
           </select> 
           </label>
             <p></p>
-            <label>
-              Course:
-              <input name="course" className="form-control form-center" type="text"
-                value={this.state.course} onChange={this.handleChange}
-                placeholder="Course played" size="50" maxLength="50" />
-            </label>
+            <label>Course:
+          <select name="player" value={this.state.player} 
+            className="form-control form-center" onChange={this.handleChange}>
+            <option value="ab (sw)">ab (sw)</option>
+            <option value="Albert Park Golf Course (Melbourne, Australia)">Albert Park Golf Course (Melbourne, Australia)</option>
+            <option value="Arrowhead Golf Club Blue (Molalla, OR)">Arrowhead Golf Club Blue (Molalla, OR)</option>
+            <option value="Bing Maloney Golf Course Red (Sacramento, CA)">Bing Maloney Golf Course Red (Sacramento, CA)</option>
+            <option value="Bing Maloney Golf Course White (Sacramento, CA)">Bing Maloney Golf Course White (Sacramento, CA)</option>
+            <option value="Blackhorse Golf Club - South Course Blue (Cypress, TX)">Blackhorse Golf Club - South Course Blue (Cypress, TX)</option>
+            <option value="Blackhorse Golf Club - South Course Red (Cypress, TX)">Blackhorse Golf Club - South Course Red (Cypress, TX)</option>
+            <option value="Blackhorse Golf Club - South Course White (Cypress, TX)">Blackhorse Golf Club - South Course White (Cypress, TX)</option>
+            <option value="Bryden Canyon Golf Course White (Lewiston, ID)">Bryden Canyon Golf Course White (Lewiston, ID)</option>
+            <option value="Cascata Golf Course White (Boulder City, Nevada)">Cascata Golf Course White (Boulder City, Nevada)</option>
+            <option value="Esmeralda Golf Course White (Spokane, WA, USA)">Esmeralda Golf Course White (Spokane, WA, USA)</option>
+            <option value="Glenoaks Golf & Country Club Mens Blue (Prospect KY)">Glenoaks Golf & Country Club Mens Blue (Prospect KY)</option>
+            <option value="Glenoaks Golf & Country Club Seniors White (Prospect, KY)">Glenoaks Golf & Country Club Seniors White (Prospect, KY)</option>
+            <option value="Glenoaks Golf & Country Club Womens Red (Prospect, KY)">Glenoaks Golf & Country Club Womens Red (Prospect, KY)</option>
+            <option value="Horton Smith Golf Course Blue (Springfield, MO)">Horton Smith Golf Course Blue (Springfield, MO)</option>
+            <option value="Horton Smith Golf Course Red (Springfield, MO)">Horton Smith Golf Course Red (Springfield, MO)</option>
+            <option value="Horton Smith Golf Course White (Springfield, MO)">Horton Smith Golf Course White (Springfield, MO)</option>
+            <option value="Meriwether National Golf Club White (Hillsboro, OR)">Meriwether National Golf Club White (Hillsboro, OR)</option>
+            <option value="Mountain Top Golf Course Back (Hollister, MO)">Mountain Top Golf Course Back (Hollister, MO)</option>
+            <option value="Oneway Golf Club Ladies (Tsuchiura, Ibaraki, Japan)">Oneway Golf Club Ladies (Tsuchiura, Ibaraki, Japan)</option>
+          </select> 
+          </label>
           <p></p>
           <label>Type:
           <select name="type" value={this.state.type} 

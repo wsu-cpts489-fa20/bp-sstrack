@@ -11,6 +11,8 @@ class CreateEditAccountDialog extends React.Component {
         this.newUserRef = React.createRef();
         this.repeatPassRef = React.createRef();
         this.profilePicRef = React.createRef();
+        //Create date object for today for filing in the date
+        let today = new Date(Date.now()-(new Date()).getTimezoneOffset()*60000);
         this.state = {accountName: "",
                       displayName: "",
                       profilePicURL: "https://icon-library.net//images/default-profile-icon/default-profile-icon-24.jpg",
@@ -18,6 +20,19 @@ class CreateEditAccountDialog extends React.Component {
                       passwordRepeat: "",
                       securityQuestion: "",
                       securityAnswer: "",
+                      firstName: "",
+                      lastName: "",
+                      hometown: "",
+                      bday: today.toISOString().substr(0,10),
+                      handicap: "",
+                      homeCourse: "",
+                      firstRoundDate: today.toISOString().substr(0,10),
+                      kmin: 0,
+                      ksec: 0,
+                      smin: 0,
+                      ssec: 0,
+                      sstrokes: "18",
+                      //clubs: "",
                       formUpdated: false,
                       confirmDelete: false};
     } 
@@ -39,7 +54,20 @@ class CreateEditAccountDialog extends React.Component {
                            password: userData.password,
                            passwordRepeat: userData.password,
                            securityQuestion: userData.securityQuestion,
-                           securityAnswer: userData.securityAnswer});
+                           securityAnswer: userData.securityAnswer,
+                           firstName: userData.firstName,
+                           lastName: userData.lastName,
+                           hometown: userData.hometown,
+                           bday: userData.bday.substr(0,10),
+                           handicap: userData.handicap,
+                           homeCourse: userData.homeCourse,
+                           firstRoundDate: userData.firstRoundDate.substr(0,10),
+                           kmin: userData.kmin,
+                           ksec: userData.ksec,
+                           smin: userData.smin,
+                           ssec: userData.ssec,
+                           sstrokes: userData.sstrokes
+                        });
         }
     }
 
@@ -136,8 +164,21 @@ class CreateEditAccountDialog extends React.Component {
             password: this.state.password,
             profilePicURL: this.state.profilePicURL,
             securityQuestion: this.state.securityQuestion,
-            securityAnswer: this.state.securityAnswer
+            securityAnswer: this.state.securityAnswer,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            hometown: this.state.hometown,
+            bday: this.state.bday,
+            handicap: this.state.handicap,
+            homeCourse: this.state.homeCourse,
+            firstRoundDate: this.state.firstRoundDate,
+            kmin: this.state.kmin,
+            ksec: this.state.ksec,
+            smin: this.state.smin,
+            ssec: this.state.ssec,
+            sstrokes: this.state.sstrokes,
         };
+                      
         const url = '/users/' + this.state.accountName;
         let res;
         if (this.props.create) { //use POST route to create new user account
@@ -327,6 +368,152 @@ class CreateEditAccountDialog extends React.Component {
                 />
             </label>
             <br/>
+            {this.props.create ? null :
+            <div>
+             <label>
+                 First Name:
+                 <textarea
+                 id="firstName"
+                 className="form-control form-text form-center"
+                 name="firstName"
+                 type="text"
+                 placeholder="First Name"
+                 rows="2"
+                 cols="35"
+                 maxLength="30"
+                 required={false}
+                 value={this.state.firstName}
+                 onChange={this.handleChange}
+                 />
+             </label>
+             <br></br>
+             <label>
+                 Last Name:
+                 <textarea
+                 id="lastName"
+                 className="form-control form-text form-center"
+                 name="lastName"
+                 type="text"
+                 placeholder="Last Name"
+                 rows="2"
+                 cols="35"
+                 maxLength="30"
+                 required={false}
+                 value={this.state.lastName}
+                 onChange={this.handleChange}
+                 />
+             </label>
+             <br></br>
+             <label>
+                 Hometown:
+                 <textarea
+                 id="hometown"
+                 className="form-control form-text form-center"
+                 name="hometown"
+                 type="text"
+                 placeholder="Seattle"
+                 rows="2"
+                 cols="35"
+                 maxLength="30"
+                 required={false}
+                 value={this.state.hometown}
+                 onChange={this.handleChange}
+                 />
+             </label>
+             <br></br>
+             <label>
+                 Birthday:
+                 <input
+                 id="bday"
+                 className="form-control form-text form-center"
+                 name="bday"
+                 type="date"
+                 required={false}
+                 value={this.state.bday}
+                 onChange={this.handleChange}
+                 />
+             </label>
+             <br></br>
+             <label>
+                 Golf Handicap:
+                 <textarea
+                 id="handicap"
+                 className="form-control form-text form-center"
+                 name="handicap"
+                 type="text"
+                 placeholder="Handicap requirments"
+                 rows="2"
+                 cols="35"
+                 maxLength="60"
+                 required={false}
+                 value={this.state.handicap}
+                 onChange={this.handleChange}
+                 />
+             </label>
+             <br></br>
+             <label>
+                 First Speedgolf Round:
+                 <input
+                 id="firstRoundDate"
+                 className="form-control form-text form-center"
+                 name="firstRoundDate"
+                 type="date"
+                 required={false}
+                 value={this.state.firstRoundDate}
+                 onChange={this.handleChange}
+                 />
+             </label>
+             <br></br>
+             <label>
+                 Home Course:
+                 <textarea
+                 id="homeCourse"
+                 className="form-control form-text form-center"
+                 name="homeCourse"
+                 type="text"
+                 placeholder="Seattle's Speedgolf"
+                 rows="2"
+                 cols="35"
+                 maxLength="30"
+                 required={false}
+                 value={this.state.homeCourse}
+                 onChange={this.handleChange}
+                 />
+             </label>
+             <br></br>
+             <label>
+                Best 5km:
+                <br></br>
+                <input name="kmin" type="number" size="3"
+                min="0" max="400" value={this.state.kmin}
+                onChange={this.handleChange} />:  
+                <input name="ksec" type="number" size="2"
+                min="0" max="60" value={this.state.ksec} 
+                onChange={this.handleChange} /> 
+            </label>
+             <br></br>
+             <label>
+                Best Speedgolf Stats:
+                <br></br>
+                Strokes:
+                <br></br>
+                <input name="sstrokes" className="form-center" type="text" size="6" 
+                disabled={true} value={this.state.sstrokes} />
+                <br></br>
+                Time:
+                <br></br>
+                <input name="smin" type="number" size="3"
+                min="0" max="400" value={this.state.smin}
+                onChange={this.handleChange} />:  
+                <input name="ssec" type="number" size="2"
+                min="0" max="60" value={this.state.ssec} 
+                onChange={this.handleChange} /> 
+            </label>
+             <br></br>
+
+             </div> 
+             
+            }
             {!this.props.create ?  
             <button className="btn btn-small btn-danger" onClick={this.confirmDeleteAccount}>
                 Delete Account...

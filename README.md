@@ -1,7 +1,7 @@
 # Milestone 3
 For this week, we focused on expanding the core systems of the base app. The systems this week were the user account information and the logging a new round form. For the most part, we were able to get most of the features for each of these systems expanded to where it coincided with the requirements document. Some more advanced features were not able to be done this week due to the added stress of having to meet with Dr. H to remove some inactive members, the whole situation hasn't been great for group morale, but at least we're making progress again.
 
-Link to tests: *insert link here*
+Link to tests: https://streamable.com/kbix25
 
 
 

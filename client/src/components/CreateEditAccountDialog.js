@@ -54,7 +54,20 @@ class CreateEditAccountDialog extends React.Component {
                            password: userData.password,
                            passwordRepeat: userData.password,
                            securityQuestion: userData.securityQuestion,
-                           securityAnswer: userData.securityAnswer});
+                           securityAnswer: userData.securityAnswer,
+                           firstName: userData.firstName,
+                           lastName: userData.lastName,
+                           hometown: userData.hometown,
+                           bday: userData.bday,
+                           handicap: userData.handicap,
+                           homeCourse: userData.homeCourse,
+                           firstRoundDate: userData.firstRoundDate,
+                           kmin: userData.kmin,
+                           ksec: userData.ksec,
+                           smin: userData.smin,
+                           ssec: userData.ssec,
+                           sstrokes: userData.sstrokes
+                        });
         }
     }
 
@@ -440,6 +453,19 @@ class CreateEditAccountDialog extends React.Component {
                  maxLength="60"
                  required={false}
                  value={this.state.handicap}
+                 onChange={this.handleChange}
+                 />
+             </label>
+             <br></br>
+             <label>
+                 First Speedgolf Round:
+                 <input
+                 id="firstRoundDate"
+                 className="form-control form-text form-center"
+                 name="firstRoundDate"
+                 type="date"
+                 required={false}
+                 value={this.state.firstRoundDate}
                  onChange={this.handleChange}
                  />
              </label>

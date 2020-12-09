@@ -32,7 +32,26 @@ class CreateEditAccountDialog extends React.Component {
                       smin: 0,
                       ssec: 0,
                       sstrokes: "18",
-                      //clubs: "",
+                      // clubs storage
+                      c2i: 0 ,
+                      c3i: 0,
+                      c4i: 0,
+                      c5i: 0,
+                      c6i: 0,
+                      c7i: 0,
+                      c8i: 0,
+                      c9i: 0,
+                      cPW: 0,
+                      cGW: 0,
+                      cSW: 0,
+                      cLW: 0,
+                      c1W: 0,
+                      c3W: 0,
+                      c4W: 0,
+                      c5W: 0,
+                      cHybrid: 0,
+                      cPutter: 0,
+                      totalClubs: 0,
                       formUpdated: false,
                       confirmDelete: false};
     } 
@@ -93,6 +112,11 @@ class CreateEditAccountDialog extends React.Component {
     //handleChange--Called when a field in a dialog box form changes.
     handleChange = (event) => {
         const formUpdated = (this.origAccountInfo == null ? true : this.formIsUpdated(event.target.name,event.target.value));
+        
+        if(event.target.className === "clubItem") {
+            console.log("Club item");
+        }
+        
         if (event.target.name === "profilePic") {
             if (event.target.value.length == 0) { //The user canceled the file selection -- set back to default
                 this.setState({profilePicURL: "https://icon-library.net//images/default-profile-icon/default-profile-icon-24.jpg",
@@ -112,6 +136,8 @@ class CreateEditAccountDialog extends React.Component {
             this.setState({[event.target.name]: event.target.value,
                            formUpdated: formUpdated},this.checkDataValidity);
         }
+
+        
     } 
 
     //formisUpdated-- Checks whether any form data element has changed from the original. If so, 
@@ -516,6 +542,160 @@ class CreateEditAccountDialog extends React.Component {
                 onChange={this.handleChange} /> 
             </label>
              <br></br>
+             <label>Clubs:
+             <input id="totalClubs" name="totalClubs" className="form-center" type="text" size="6" 
+                disabled={true} value={this.state.totalClubs} />
+             <br></br>
+                <label>1W:
+                    <select id="c1W" name="c1W" value={this.state.c1W} 
+                    className="form-control form-center" onChange={this.handleChange}>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    </select> 
+                </label>
+                <label>3W:
+                    <select id="c3W" name="c3W" value={this.state.c3W} 
+                    className="form-control form-center" onChange={this.handleChange}>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    </select> 
+                </label>
+                <label>4W:
+                    <select id="c4W" name="c4W" value={this.state.c4W} 
+                    className="form-control form-center" onChange={this.handleChange}>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    </select> 
+                </label>
+                <label>5W:
+                    <select id="c5W" name="c5W" value={this.state.c5W} 
+                    className="form-control form-center" onChange={this.handleChange}>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    </select> 
+                </label>
+                <label>Hybrid:
+                    <select id="cHybrid" name="cHybrid" value={this.state.cHybrid} 
+                    className="form-control form-center" onChange={this.handleChange}>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    </select> 
+                </label>
+                <br></br>
+                <label>2i:
+                    <select id="c2i" name="c2i" value={this.state.c2i} 
+                    className="form-control form-center" onChange={this.handleChange}>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    </select> 
+                </label>
+                <label>3i:
+                    <select id="c3i" name="c3i" value={this.state.c3i} 
+                    className="form-control form-center" onChange={this.handleChange}>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    </select> 
+                </label>
+                <label>4i:
+                    <select id="c4i" name="c4i" value={this.state.c4i} 
+                    className="form-control form-center" onChange={this.handleChange}>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    </select> 
+                </label>
+                <label>5i:
+                    <select id="c5i" name="c5i" value={this.state.c5i} 
+                    className="form-control form-center" onChange={this.handleChange}>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    </select> 
+                </label>
+                <label>6i:
+                    <select id="c6i" name="c6i" value={this.state.c6i} 
+                    className="form-control form-center" onChange={this.handleChange}>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    </select> 
+                </label>
+                <label>7i:
+                    <select id="c7i" name="c7i" value={this.state.c7i} 
+                    className="form-control form-center" onChange={this.handleChange}>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    </select> 
+                </label>
+                <label>8i:
+                    <select id="c8i" name="c8i" value={this.state.c8i} 
+                    className="form-control form-center" onChange={this.handleChange}>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    </select> 
+                </label>
+                <label>9i:
+                    <select id="c9i" name="c9i" value={this.state.c9i} 
+                    className="form-control form-center" onChange={this.handleChange}>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    </select> 
+                </label>
+                /<br/><br/>
+                <label>PW:
+                    <select id="cPW" name="cPW" value={this.state.cPW} 
+                    className="form-control form-center" onChange={this.handleChange}>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    </select> 
+                </label>
+                <label>GW:
+                    <select id="cGW" name="cGW" value={this.state.cGW} 
+                    className="form-control form-center" onChange={this.handleChange}>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    </select> 
+                </label>
+                <label>SW:
+                    <select id="cSW" name="cSW" value={this.state.cSW} 
+                    className="form-control form-center" onChange={this.handleChange}>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    </select> 
+                </label>
+                <label>LW:
+                    <select id="cLW" name="cLW" value={this.state.cLW} 
+                    className="form-control form-center" onChange={this.handleChange}>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    </select> 
+                </label>
+                <label>Putter:
+                    <select id="cPutter" name="cPutter" value={this.state.cPutter} 
+                    className="form-control form-center" onChange={this.handleChange}>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    </select> 
+                </label>
+
+             </label>
+             
+
 
              </div> 
              

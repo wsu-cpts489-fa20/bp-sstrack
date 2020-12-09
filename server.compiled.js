@@ -38,7 +38,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 require('dotenv').config();
 
-var LOCAL_PORT = 8081;
+var LOCAL_PORT = 8080;
 var DEPLOY_URL = "http://localhost:8081";
 var PORT = process.env.HTTP_PORT || LOCAL_PORT;
 var GithubStrategy = _passportGithub["default"].Strategy;

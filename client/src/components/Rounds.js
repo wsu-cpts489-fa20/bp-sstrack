@@ -15,6 +15,7 @@ class Rounds extends React.Component {
         super();
         this.deleteId = "";
         this.editId = "";
+        this.viewId = "";
         this.state = {errorMsg: ""};           
     }
 
@@ -82,7 +83,24 @@ class Rounds extends React.Component {
             this.props.refreshOnUpdate(AppMode.ROUNDS);
         }  
     }
- 
+    viewRound = async (newData) => {
+        const url = '/rounds/' + this.props.userObj.id + '/' + 
+            this.props.userObj.rounds[this.editId]._id;
+        const res = await fetch(url, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                },
+            method: 'PUT',
+            body: JSON.stringify(newData)}); 
+        const msg = await res.text();
+        if (res.status != 200) {
+            this.setState({errorMsg: msg});
+            this.props.changeMode(AppMode.ROUNDS);
+        } else {
+            this.props.refreshOnUpdate(AppMode.ROUNDS);
+        }
+    }
     //setDeleteId -- Capture in this.state.deleteId the unique id of the item
     //the user is considering deleting.
     setDeleteId = (val) => {
@@ -96,7 +114,10 @@ class Rounds extends React.Component {
         this.editId = val;
         this.setState({errorMsg: ""});
     }
-
+    setViewId = (val) => {
+        this.viewId = val;
+        this.setState({errorMsg: ""});
+    }
     closeErrorMsg = () => {
         this.setState({errorMsg: ""});
     }
@@ -116,6 +137,7 @@ class Rounds extends React.Component {
                     <RoundsTable 
                         rounds={this.props.userObj.rounds}
                         setEditId={this.setEditId}
+                        setViewId={this.setViewId}
                         setDeleteId={this.setDeleteId}
                         deleteRound={this.deleteRound}
                         changeMode={this.props.changeMode}
@@ -147,6 +169,19 @@ class Rounds extends React.Component {
                         startData={thisRound} 
                         saveRound={this.editRound} />
                 );
+            case AppMode.ROUNDS_VIEWROUND:
+                    let viewround = {...this.props.userObj.rounds[this.viewId]};
+                    viewround.date = viewround.date.substr(0,10);
+                    if (viewround.seconds < 10) {
+                        viewround.seconds = "0" + viewround.seconds;
+                    } 
+                    delete viewround.SGS;
+                    return (
+                        <RoundForm
+                            mode={this.props.mode}
+                            startData={viewround} 
+                            saveRound={this.viewRound} />
+                    );
         }
     }
 

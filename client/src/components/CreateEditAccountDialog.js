@@ -256,6 +256,10 @@ class CreateEditAccountDialog extends React.Component {
                 const resText = await res.text();
                 this.props.done(resText,false);
             }
+
+        } else if(this.props.handleOAuthLoginClick) {
+            this.props.handleOAuthLoginClick("facebook");
+
         } else { //use PUT route to update existing user account
             res = await fetch(url, {
                 headers: {
@@ -517,6 +521,12 @@ class CreateEditAccountDialog extends React.Component {
                  />
              </label>
              <br></br>
+             <button type="button" className="btn btn-facebook" 
+                onClick={this.props.handleOAuthLoginClick}>
+                <span id="facebookBtn" className="fa fa-facebook"></span>&nbsp;
+                    Link Account with Facebook
+            </button>
+            <br></br>
              <label id="firstRoundBox">
                  First Speedgolf Round:
                  <input

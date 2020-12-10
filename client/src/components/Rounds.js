@@ -171,7 +171,7 @@ class Rounds extends React.Component {
                 );
             case AppMode.ROUNDS_VIEWROUND:
                 return (
-                    <RoundForm
+                    <View
                         mode={this.props.mode}
                         startData={""} 
                         saveRound={this.viewRound} />

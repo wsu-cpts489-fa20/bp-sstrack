@@ -170,18 +170,12 @@ class Rounds extends React.Component {
                         saveRound={this.editRound} />
                 );
             case AppMode.ROUNDS_VIEWROUND:
-                    let viewround = {...this.props.userObj.rounds[this.viewId]};
-                    viewround.date = viewround.date.substr(0,10);
-                    if (viewround.seconds < 10) {
-                        viewround.seconds = "0" + viewround.seconds;
-                    } 
-                    delete viewround.SGS;
-                    return (
-                        <RoundForm
-                            mode={this.props.mode}
-                            startData={viewround} 
-                            saveRound={this.viewRound} />
-                    );
+                return (
+                    <RoundForm
+                        mode={this.props.mode}
+                        startData={""} 
+                        saveRound={this.viewRound} />
+                );
         }
     }
 

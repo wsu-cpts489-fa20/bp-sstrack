@@ -117,6 +117,34 @@ const userSchema = new Schema({
 });
 const User = mongoose.model("User",userSchema); 
 
+const courseSchema = new Schema({
+  ID: String,
+  Name: String,
+  Location: String,
+  Tees: String,
+  Holes: String,
+  StrokePars: String,
+  TimePars: String,
+  GolfYardage: String,
+  RunninngYardage: String,
+  StrokePar: String,
+  TimePar: String,
+  SGPar: String,
+  Type: String,
+  Ownership: String,
+  TotalHoles: String,
+  Address: String,
+  City: String,
+  StateProvence: String,
+  Postal: String,
+  Country: String,
+  Phone: String,
+  Picture: String,
+  Website: String,
+  Contact: String
+})
+const Course = mongoose.model("Course", courseSchema);
+
 //////////////////////////////////////////////////////////////////////////
 //PASSPORT SET-UP
 //The following code sets up the app with OAuth authentication using
@@ -484,6 +512,34 @@ app.delete('/users/:userId', async(req, res, next) => {
       req.params.userId + ": " + err);
   }
 });
+
+/////////////////////////////////
+//COURSES ROUTES
+/////////////////////////////////
+
+app.get('/courses', async(req, res) => {
+  console.log("in /courses (GET) route");
+  try{
+    var coursesList = [];
+    //console.log("Inside Try block");
+    var array = await Course.find({});
+    //console.log("Inside Try block");
+    //console.log(array);
+    array.forEach(function (item,index) {
+      let element = {id: item.ID,
+                     name: item.Name};
+      coursesList.push(element);
+    })
+    //console.log(coursesList);
+
+    return res.status(200).json({coursesList});
+  }
+  catch (err){
+    console.log();
+    return res.status(400).message("Unexpected Error when getting course data " + err);
+  }
+})
+
 
 /////////////////////////////////
 //ROUNDS ROUTES

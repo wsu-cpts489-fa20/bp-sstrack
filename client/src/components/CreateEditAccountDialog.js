@@ -1,6 +1,5 @@
 import React from 'react';
 import ConfirmDeleteAccount from './ConfirmDeleteAccount.js';
-import confirmDeleteAccount from './ConfirmDeleteAccount.js';
 
 class CreateEditAccountDialog extends React.Component {
 
@@ -51,7 +50,6 @@ class CreateEditAccountDialog extends React.Component {
                       c5W: 0,
                       cHybrid: 0,
                       cPutter: 0,
-                      totalClubs: 0,
                       formUpdated: false,
                       confirmDelete: false};
     } 
@@ -85,7 +83,25 @@ class CreateEditAccountDialog extends React.Component {
                            ksec: userData.ksec,
                            smin: userData.smin,
                            ssec: userData.ssec,
-                           sstrokes: userData.sstrokes
+                           sstrokes: userData.sstrokes,
+                           c2i: userData.c2i ,
+                           c3i: userData.c3i,
+                           c4i: userData.c4i,
+                           c5i: userData.c5i,
+                           c6i: userData.c6i,
+                           c7i: userData.c7i,
+                           c8i: userData.c8i,
+                           c9i: userData.c9i,
+                           cPW: userData.cPW,
+                           cGW: userData.cGW,
+                           cSW: userData.cSW,
+                           cLW: userData.cLW,
+                           c1W: userData.c1W,
+                           c3W: userData.c3W,
+                           c4W: userData.c4W,
+                           c5W: userData.c5W,
+                           cHybrid: userData.cHybrid,
+                           cPutter: userData.cPutter,
                         });
         }
     }
@@ -112,11 +128,7 @@ class CreateEditAccountDialog extends React.Component {
     //handleChange--Called when a field in a dialog box form changes.
     handleChange = (event) => {
         const formUpdated = (this.origAccountInfo == null ? true : this.formIsUpdated(event.target.name,event.target.value));
-        
-        if(event.target.className === "clubItem") {
-            console.log("Club item");
-        }
-        
+
         if (event.target.name === "profilePic") {
             if (event.target.value.length == 0) { //The user canceled the file selection -- set back to default
                 this.setState({profilePicURL: "https://icon-library.net//images/default-profile-icon/default-profile-icon-24.jpg",
@@ -138,7 +150,11 @@ class CreateEditAccountDialog extends React.Component {
         }
 
         
-    } 
+    }
+    
+    getVal = (name) => {
+        return this.state
+    }
 
     //formisUpdated-- Checks whether any form data element has changed from the original. If so, 
     //returns true. Returns false otherwise. Note that in case of editing new account, always returns
@@ -203,6 +219,24 @@ class CreateEditAccountDialog extends React.Component {
             smin: this.state.smin,
             ssec: this.state.ssec,
             sstrokes: this.state.sstrokes,
+            c2i: this.state.c2i ,
+            c3i: this.state.c3i,
+            c4i: this.state.c4i,
+            c5i: this.state.c5i,
+            c6i: this.state.c6i,
+            c7i: this.state.c7i,
+            c8i: this.state.c8i,
+            c9i: this.state.c9i,
+            cPW: this.state.cPW,
+            cGW: this.state.cGW,
+            cSW: this.state.cSW,
+            cLW: this.state.cLW,
+            c1W: this.state.c1W,
+            c3W: this.state.c3W,
+            c4W: this.state.c4W,
+            c5W: this.state.c5W,
+            cHybrid: this.state.cHybrid,
+            cPutter: this.state.cPutter,
         };
                       
         const url = '/users/' + this.state.accountName;
@@ -543,12 +577,10 @@ class CreateEditAccountDialog extends React.Component {
             </label>
              <br></br>
              <label>Clubs:
-             <input id="totalClubs" name="totalClubs" className="form-center" type="text" size="6" 
-                disabled={true} value={this.state.totalClubs} />
              <br></br>
                 <label>1W:
                     <select id="c1W" name="c1W" value={this.state.c1W} 
-                    className="form-control form-center" onChange={this.handleChange}>
+                    className="form-control form-center clubItem" onChange={this.handleChange}>
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -556,7 +588,7 @@ class CreateEditAccountDialog extends React.Component {
                 </label>
                 <label>3W:
                     <select id="c3W" name="c3W" value={this.state.c3W} 
-                    className="form-control form-center" onChange={this.handleChange}>
+                    className="form-control form-center clubItem" onChange={this.handleChange}>
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -564,7 +596,7 @@ class CreateEditAccountDialog extends React.Component {
                 </label>
                 <label>4W:
                     <select id="c4W" name="c4W" value={this.state.c4W} 
-                    className="form-control form-center" onChange={this.handleChange}>
+                    className="form-control form-center clubItem" onChange={this.handleChange}>
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>

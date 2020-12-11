@@ -103,6 +103,7 @@ test('Log New Round', async t => {
     const pw = '12345ASDf';
     const emailInput = Selector('#emailInput');
     const passwordInput = Selector('#passwordInput');
+    const courseOption = Selector('#coursesDropDown').find('option')
 
 
     await t
@@ -117,4 +118,7 @@ test('Log New Round', async t => {
     .click('#roundsMode')
     .click('#floatBtn')
     .expect(Selector('#coursesDropDown').visible).eql(true)
+    .click(Selector('#coursesDropDown'))
+    .click(Selector('#coursesDropDown').find('option').withText('ab (sw)'))
+    .expect(Selector('#coursesDropDown').value).eql('ab (sw)')
 })

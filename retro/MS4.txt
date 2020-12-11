@@ -1,0 +1,10 @@
+A. 
+For our MS4, we have met during our designated team meetings and helped each other out.
+What has improved and is going well is our team communication and team contribution.
+This is a great stepping stone as previously we had many issues with the above.
+
+B.
+Currently, there are a few things that are not going to well. One of the main issues we are facing
+is getting the application deployed to AWS. I have tried many things from the text book, internet, 
+and the post that Dr. H mentioned to get AWS deployed. We also had some merge issues and bugs
+when viewing a rounds details, so that was left out of the project.

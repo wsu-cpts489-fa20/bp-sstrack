@@ -361,7 +361,7 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRe
 
   app.get('/link/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/'}),
   (req,res) => {
-    console.log("auth/facebook/callback reached.");
+    console.log("link/facebook/callback reached.");
     res.redirect('/');
   });
 //LOGOUT route: Use passport's req.logout() method to log the user out and

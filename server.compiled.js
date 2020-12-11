@@ -38,7 +38,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 require('dotenv').config();
 
-var LOCAL_PORT = 8080;
+var LOCAL_PORT = 8081;
 var DEPLOY_URL = "http://localhost:8081";
 var PORT = process.env.HTTP_PORT || LOCAL_PORT;
 var GithubStrategy = _passportGithub["default"].Strategy;
@@ -606,6 +606,9 @@ app.get('/auth/google', _passport["default"].authenticate('google', {
 }));
 app.get('/auth/facebook', _passport["default"].authenticate('facebook', {
   scope: ['email']
+}));
+app.get('/link/facebook', _passport["default"].authenticate('facebook', {
+  scope: ['email']
 })); //CALLBACK route:  GitHub will call this route after the
 //OAuth authentication process is complete.
 //req.isAuthenticated() tells us whether authentication was successful.
@@ -628,6 +631,12 @@ app.get('/auth/facebook/callback', _passport["default"].authenticate('facebook',
   failureRedirect: '/'
 }), function (req, res) {
   console.log("auth/facebook/callback reached.");
+  res.redirect('/');
+});
+app.get('/link/facebook/callback', _passport["default"].authenticate('facebook', {
+  failureRedirect: '/'
+}), function (req, res) {
+  console.log("link/facebook/callback reached.");
   res.redirect('/');
 }); //LOGOUT route: Use passport's req.logout() method to log the user out and
 //redirect the user to the main app page. req.isAuthenticated() is toggled to false.

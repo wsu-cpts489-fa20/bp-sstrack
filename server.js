@@ -114,6 +114,24 @@ const userSchema = new Schema({
   ssec : {type: Number, required: false, min: 0, max: 60},
   sstrokes: String, 
   //clubs: String
+  c2i: Number ,
+  c3i: Number,
+  c4i: Number,
+  c5i: Number,
+  c6i: Number,
+  c7i: Number,
+  c8i: Number,
+  c9i: Number,
+  cPW: Number,
+  cGW: Number,
+  cSW: Number,
+  cLW: Number,
+  c1W: Number,
+  c3W: Number,
+  c4W: Number,
+  c5W: Number,
+  cHybrid: Number,
+  cPutter: Number,
 });
 const User = mongoose.model("User",userSchema); 
 
@@ -317,6 +335,7 @@ app.get('/auth/google', passport.authenticate('google', {scope: ['profile']}));
 
 app.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email']}));
 
+app.get('/link/facebook', passport.authenticate('facebook', {scope: ['email']}));
 //CALLBACK route:  GitHub will call this route after the
 //OAuth authentication process is complete.
 //req.isAuthenticated() tells us whether authentication was successful.
@@ -340,6 +359,11 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRe
     res.redirect('/');
   });
 
+  app.get('/link/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/'}),
+  (req,res) => {
+    console.log("link/facebook/callback reached.");
+    res.redirect('/');
+  });
 //LOGOUT route: Use passport's req.logout() method to log the user out and
 //redirect the user to the main app page. req.isAuthenticated() is toggled to false.
 app.get('/auth/logout', (req, res) => {
@@ -451,7 +475,24 @@ app.post('/users/:userId',  async (req, res, next) => {
         smin : 0,
         ssec : 0,
         sstrokes: "18", 
-        //clubs: ""
+        c2i: 0 ,
+        c3i: 0,
+        c4i: 0,
+        c5i: 0,
+        c6i: 0,
+        c7i: 0,
+        c8i: 0,
+        c9i: 0,
+        cPW: 0,
+        cGW: 0,
+        cSW: 0,
+        cLW: 0,
+        c1W: 0,
+        c3W: 0,
+        c4W: 0,
+        c5W: 0,
+        cHybrid: 0,
+        cPutter: 0,
       }).save();
       return res.status(201).send("New account for '" + 
         req.params.userId + "' successfully created.");
@@ -472,7 +513,10 @@ app.put('/users/:userId',  async (req, res, next) => {
   const validProps = ['password', 'displayName', 'profilePicURL', 
     'securityQuestion', 'securityAnswer', 'firstName', 'lastName', 
     'hometown', 'bday','handicap', 'homeCourse', 'firstRoundDate',
-    'kmin', 'ksec','smin','ssec','sstrokes'];
+    'kmin', 'ksec','smin','ssec','sstrokes', 'c2i','c3i','c4i','c5i',
+    'c6i','c7i','c8i','c9i','cPW','cGW','cSW','cLW','c1W','c3W','c4W',
+    'c5W','cHybrid','cPutter',];
+    
   for (const bodyProp in req.body) {
     if (!validProps.includes(bodyProp)) {
       return res.status(400).send("users/ PUT request formulated incorrectly." +

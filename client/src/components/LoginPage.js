@@ -239,7 +239,8 @@ cancelCreateAccount = () => {
               <CreateEditAccountDialog
                 create={true} 
                 done={this.accountCreateDone}
-                cancel={this.cancelCreateAccount} /> : null}
+                cancel={this.cancelCreateAccount}
+                handleOAuthLoginClick = {this.handleOAuthLoginClick} /> : null}
             {this.state.showResetPasswordDialog ? <ResetPasswordDialog /> : null}
         </center>
         </div>

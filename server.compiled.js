@@ -38,7 +38,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 require('dotenv').config();
 
-var LOCAL_PORT = 8081;
+var LOCAL_PORT = 8080;
 var DEPLOY_URL = "http://localhost:8081";
 var PORT = process.env.HTTP_PORT || LOCAL_PORT;
 var GithubStrategy = _passportGithub["default"].Strategy;
@@ -210,8 +210,26 @@ var userSchema = new Schema({
     min: 0,
     max: 60
   },
-  sstrokes: String //clubs: String
-
+  sstrokes: String,
+  //clubs: String
+  c2i: Number,
+  c3i: Number,
+  c4i: Number,
+  c5i: Number,
+  c6i: Number,
+  c7i: Number,
+  c8i: Number,
+  c9i: Number,
+  cPW: Number,
+  cGW: Number,
+  cSW: Number,
+  cLW: Number,
+  c1W: Number,
+  c3W: Number,
+  c4W: Number,
+  c5W: Number,
+  cHybrid: Number,
+  cPutter: Number
 });
 
 var User = _mongoose["default"].model("User", userSchema);
@@ -772,8 +790,25 @@ app.post('/users/:userId', /*#__PURE__*/function () {
               ksec: 0,
               smin: 0,
               ssec: 0,
-              sstrokes: "18" //clubs: ""
-
+              sstrokes: "18",
+              c2i: 0,
+              c3i: 0,
+              c4i: 0,
+              c5i: 0,
+              c6i: 0,
+              c7i: 0,
+              c8i: 0,
+              c9i: 0,
+              cPW: 0,
+              cGW: 0,
+              cSW: 0,
+              cLW: 0,
+              c1W: 0,
+              c3W: 0,
+              c4W: 0,
+              c5W: 0,
+              cHybrid: 0,
+              cPutter: 0
             }).save();
 
           case 15:
@@ -819,7 +854,7 @@ app.put('/users/:userId', /*#__PURE__*/function () {
             return _context8.abrupt("return", res.status(400).send("users/ PUT request formulated incorrectly." + "It must contain 'userId' as parameter."));
 
           case 3:
-            validProps = ['password', 'displayName', 'profilePicURL', 'securityQuestion', 'securityAnswer', 'firstName', 'lastName', 'hometown', 'bday', 'handicap', 'homeCourse', 'firstRoundDate', 'kmin', 'ksec', 'smin', 'ssec', 'sstrokes'];
+            validProps = ['password', 'displayName', 'profilePicURL', 'securityQuestion', 'securityAnswer', 'firstName', 'lastName', 'hometown', 'bday', 'handicap', 'homeCourse', 'firstRoundDate', 'kmin', 'ksec', 'smin', 'ssec', 'sstrokes', 'c2i', 'c3i', 'c4i', 'c5i', 'c6i', 'c7i', 'c8i', 'c9i', 'cPW', 'cGW', 'cSW', 'cLW', 'c1W', 'c3W', 'c4W', 'c5W', 'cHybrid', 'cPutter'];
             _context8.t0 = _regeneratorRuntime["default"].keys(req.body);
 
           case 5:

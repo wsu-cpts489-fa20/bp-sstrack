@@ -1,14 +1,16 @@
-# Milestone 3
-For this week, we focused on expanding the core systems of the base app. The systems this week were the user account information and the logging a new round form. For the most part, we were able to get most of the features for each of these systems expanded to where it coincided with the requirements document. Some more advanced features were not able to be done this week due to the added stress of having to meet with Dr. H to remove some inactive members, the whole situation hasn't been great for group morale, but at least we're making progress again.
+# Milestone 4
+This week, our group focused on finishing some of the missed items from last week as well as further expand the functionality of the rounds table system. The main items for the week were linking the courses database content to the roundsForm since that had been hardcoded in, complete the local user account page with facebook integration should the user choose to link their account, and the ability to view the details of a round in a non editing format. Due to various issues, only the first item in that list was fully completed (see issues #19 and #3 for further details)
 
-Files modified: [CreateEditAccountDialog](https://github.com/wsu-cpts489-fa20/bp-sstrack/blob/master/client/src/components/CreateEditAccountDialog.js)
-[RoundForm](https://github.com/wsu-cpts489-fa20/bp-sstrack/blob/master/client/src/components/RoundForm.js)
+With this, the main files for review this week will be server.js for the routes associated with linking a Facebook account to a local user account and getting course  data from the database. RoundsForm.js for taking that data and putting it into <option> objects and CreateEditAccountDialog.js for being fully completed with the facebook integration button.
 
-The rounds form was the most modified one, but to have that save properly the other rounds documents were also modified.
+[server.js](https://github.com/wsu-cpts489-fa20/bp-sstrack/blob/master/server.js)
+
+[RoundForm.js](https://github.com/wsu-cpts489-fa20/bp-sstrack/blob/master/client/src/components/RoundForm.js)
+
+[CreateEditAccountDialog,js](https://github.com/wsu-cpts489-fa20/bp-sstrack/blob/master/client/src/components/CreateEditAccountDialog.js)
 
 
-Link to tests: https://streamable.com/kbix25
-
+Link to tests: 
 
 
 

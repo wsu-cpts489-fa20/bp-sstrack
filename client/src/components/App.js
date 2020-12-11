@@ -9,7 +9,6 @@ import FeedPage from './FeedPage.js';
 import Rounds from './Rounds.js';
 import CoursesPage from './CoursesPage.js';
 import AboutBox from './AboutBox.js';
-import View from './View.js';
 
 const modeTitle = {};
 modeTitle[AppMode.LOGIN] = "Welcome to SpeedScore";
@@ -26,7 +25,7 @@ modeToPage[AppMode.FEED] = FeedPage;
 modeToPage[AppMode.ROUNDS] = Rounds;
 modeToPage[AppMode.ROUNDS_LOGROUND] = Rounds;
 modeToPage[AppMode.ROUNDS_EDITROUND] = Rounds;
-modeToPage[AppMode.ROUNDS_VIEWROUND] = View;
+modeToPage[AppMode.ROUNDS_VIEWROUND] = Rounds;
 modeToPage[AppMode.COURSES] = CoursesPage;
 
 

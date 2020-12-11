@@ -1,6 +1,7 @@
 import React from 'react';
 
 class View extends React.Component {
+  
     constructor() {
         super();
         this.state = {showConfirmDelete: false};

@@ -22,6 +22,7 @@ class RoundsTable extends React.Component {
     this.props.setViewId(id);
     this.props.changeMode(AppMode.ROUNDS_VIEWROUND);
   }
+
   //deleteRound -- Triggered when the user clicks on the "Yes, Delete"
   //button in the Confirm Delete dialog box. It executes the deletion and
   //closes the dialog box.

@@ -7,6 +7,7 @@ import AppMode from './../AppMode.js';
 import RoundsTable from './RoundsTable.js';
 import RoundForm from './RoundForm.js';
 import FloatingButton from './FloatingButton.js';
+import View from './View.js';
 
 class Rounds extends React.Component {
 
@@ -83,6 +84,7 @@ class Rounds extends React.Component {
             this.props.refreshOnUpdate(AppMode.ROUNDS);
         }  
     }
+
     viewRound = async (newData) => {
         const url = '/rounds/' + this.props.userObj.id + '/' + 
             this.props.userObj.rounds[this.editId]._id;
@@ -97,10 +99,12 @@ class Rounds extends React.Component {
         if (res.status != 200) {
             this.setState({errorMsg: msg});
             this.props.changeMode(AppMode.ROUNDS);
-        } else {
+        } else 
+        {
             this.props.refreshOnUpdate(AppMode.ROUNDS);
         }
     }
+ 
     //setDeleteId -- Capture in this.state.deleteId the unique id of the item
     //the user is considering deleting.
     setDeleteId = (val) => {
@@ -118,6 +122,7 @@ class Rounds extends React.Component {
         this.viewId = val;
         this.setState({errorMsg: ""});
     }
+
     closeErrorMsg = () => {
         this.setState({errorMsg: ""});
     }
@@ -170,11 +175,17 @@ class Rounds extends React.Component {
                         saveRound={this.editRound} />
                 );
             case AppMode.ROUNDS_VIEWROUND:
+                let thisRound1 = {...this.props.userObj.rounds[this.editId]};
+                thisRound1.date = thisRound1.date.substr(0,10);
+                if (thisRound1.seconds < 10) {
+                    thisRound1.seconds = "0" + thisRound1.seconds;
+                } 
+                delete thisRound1.SGS;
                 return (
                     <View
                         mode={this.props.mode}
-                        startData={""} 
-                        saveRound={this.viewRound} />
+                        startData={thisRound1} 
+                        saveRound={this.viewRound} />    
                 );
         }
     }

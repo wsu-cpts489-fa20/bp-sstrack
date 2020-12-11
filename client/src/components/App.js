@@ -16,6 +16,7 @@ modeTitle[AppMode.FEED] = "Activity Feed";
 modeTitle[AppMode.ROUNDS] = "My Rounds";
 modeTitle[AppMode.ROUNDS_LOGROUND] = "Log New Round";
 modeTitle[AppMode.ROUNDS_EDITROUND] = "Edit Round";
+modeTitle[AppMode.ROUNDS_VIEWROUND] = "View Round";
 modeTitle[AppMode.COURSES] = "Courses";
 
 const modeToPage = {};
@@ -24,6 +25,7 @@ modeToPage[AppMode.FEED] = FeedPage;
 modeToPage[AppMode.ROUNDS] = Rounds;
 modeToPage[AppMode.ROUNDS_LOGROUND] = Rounds;
 modeToPage[AppMode.ROUNDS_EDITROUND] = Rounds;
+modeToPage[AppMode.ROUNDS_VIEWROUND] = Rounds;
 modeToPage[AppMode.COURSES] = CoursesPage;
 
 

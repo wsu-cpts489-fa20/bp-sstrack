@@ -7,6 +7,7 @@ import AppMode from './../AppMode.js';
 import RoundsTable from './RoundsTable.js';
 import RoundForm from './RoundForm.js';
 import FloatingButton from './FloatingButton.js';
+import View from './View.js';
 
 class Rounds extends React.Component {
 
@@ -15,6 +16,7 @@ class Rounds extends React.Component {
         super();
         this.deleteId = "";
         this.editId = "";
+        this.viewId = "";
         this.state = {errorMsg: ""};           
     }
 
@@ -82,6 +84,26 @@ class Rounds extends React.Component {
             this.props.refreshOnUpdate(AppMode.ROUNDS);
         }  
     }
+
+    viewRound = async (newData) => {
+        const url = '/rounds/' + this.props.userObj.id + '/' + 
+            this.props.userObj.rounds[this.editId]._id;
+        const res = await fetch(url, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                },
+            method: 'GET',
+            body: JSON.stringify(newData)}); 
+        const msg = await res.text();
+        if (res.status != 200) {
+            this.setState({errorMsg: msg});
+            this.props.changeMode(AppMode.ROUNDS);
+        } else 
+        {
+            this.props.refreshOnUpdate(AppMode.ROUNDS);
+        }
+    }
  
     //setDeleteId -- Capture in this.state.deleteId the unique id of the item
     //the user is considering deleting.
@@ -94,6 +116,10 @@ class Rounds extends React.Component {
     //the user is considering editing.
     setEditId = (val) => {
         this.editId = val;
+        this.setState({errorMsg: ""});
+    }
+    setViewId = (val) => {
+        this.viewId = val;
         this.setState({errorMsg: ""});
     }
 
@@ -116,6 +142,7 @@ class Rounds extends React.Component {
                     <RoundsTable 
                         rounds={this.props.userObj.rounds}
                         setEditId={this.setEditId}
+                        setViewId={this.setViewId}
                         setDeleteId={this.setDeleteId}
                         deleteRound={this.deleteRound}
                         changeMode={this.props.changeMode}
@@ -146,6 +173,19 @@ class Rounds extends React.Component {
                         mode={this.props.mode}
                         startData={thisRound} 
                         saveRound={this.editRound} />
+                );
+            case AppMode.ROUNDS_VIEWROUND:
+                let thisRound1 = {...this.props.userObj.rounds[this.editId]};
+                thisRound1.date = thisRound1.date.substr(0,10);
+                if (thisRound1.seconds < 10) {
+                    thisRound1.seconds = "0" + thisRound1.seconds;
+                } 
+                delete thisRound1.SGS;
+                return (
+                    <View
+                        mode={this.props.mode}
+                        startData={thisRound1} 
+                        saveRound={this.viewRound} />    
                 );
         }
     }

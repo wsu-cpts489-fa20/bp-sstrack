@@ -18,6 +18,10 @@ class RoundsTable extends React.Component {
     this.props.setEditId(id);
     this.props.changeMode(AppMode.ROUNDS_EDITROUND);
   }
+  viewRound = (id) => {
+    this.props.setViewId(id);
+    this.props.changeMode(AppMode.ROUNDS_VIEWROUND);
+  }
 
   //deleteRound -- Triggered when the user clicks on the "Yes, Delete"
   //button in the Confirm Delete dialog box. It executes the deletion and
@@ -65,6 +69,9 @@ class RoundsTable extends React.Component {
         <td><button onClick={this.props.menuOpen ? null : () => 
           this.editRound(r)}>
               <span className="fa fa-eye"></span></button></td>
+        <td><button onClick={this.props.menuOpen ? null : () => 
+          this.viewRound(r)}>
+              <span className="fa fa-info"></span></button></td>
         <td><button onClick={this.props.menuOpen ? null : 
           () => this.confirmDelete(r)}>
               <span className="fa fa-trash"></span></button></td>
@@ -89,7 +96,8 @@ class RoundsTable extends React.Component {
           <th>Fairway/Greens(Putt)</th>
           <th>Type</th>
           <th>Score</th>
-          <th>View/Edit...</th>
+          <th>Edit</th>
+          <th>View</th>
           <th>Delete</th>
         </tr>
         </thead>

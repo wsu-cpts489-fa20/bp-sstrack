@@ -119,6 +119,6 @@ test('Log New Round', async t => {
     .click('#floatBtn')
     .expect(Selector('#coursesDropDown').visible).eql(true)
     .click(Selector('#coursesDropDown'))
-    .click(Selector('#coursesDropDown').find('option').withText('ab (sw)'))
-    .expect(Selector('#coursesDropDown').value).eql('ab (sw)')
+    .click(Selector('#coursesDropDown').find('option').withText('Albert Park Golf Course (Melbourne, Australia)'))
+    .expect(Selector('#coursesDropDown').value).eql('Albert Park Golf Course (Melbourne, Australia)')
 })

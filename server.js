@@ -307,6 +307,7 @@ app.get('/auth/google', passport.authenticate('google', {scope: ['profile']}));
 
 app.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email']}));
 
+app.get('/link/facebook', passport.authenticate('facebook', {scope: ['email']}));
 //CALLBACK route:  GitHub will call this route after the
 //OAuth authentication process is complete.
 //req.isAuthenticated() tells us whether authentication was successful.
@@ -330,6 +331,11 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRe
     res.redirect('/');
   });
 
+  app.get('/link/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/'}),
+  (req,res) => {
+    console.log("auth/facebook/callback reached.");
+    res.redirect('/');
+  });
 //LOGOUT route: Use passport's req.logout() method to log the user out and
 //redirect the user to the main app page. req.isAuthenticated() is toggled to false.
 app.get('/auth/logout', (req, res) => {

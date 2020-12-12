@@ -40,16 +40,15 @@ class RoundForm extends React.Component {
 componentDidMount() {
   //this.populateCourses();
   //console.log("Inside componentDidMount()")
-  
-  fetch('/courses')
-  .then((res) => {
-    return res.json()
-  })
-  .then((json) => {
-    this.setState({courses: json})
-  });
-
-    
+  if (this.props.mode === AppMode.ROUNDS_LOGROUND){
+    fetch('/courses')
+    .then((res) => {
+      return res.json()
+    })
+    .then((json) => {
+      this.setState({courses: json})
+    });
+  }
 } 
   
   
@@ -152,7 +151,7 @@ componentDidMount() {
           </select> 
           </label>
             <p></p>
-            {this.state.courses.coursesList ? //This form loads so fast the componentDidMount() may be called *after* the render function, this check allows the page to render while the information is still being loaded
+            {this.props.mode === AppMode.ROUNDS_LOGROUND && this.state.courses.coursesList ? //This form loads so fast the componentDidMount() may be called *after* the render function, this check allows the page to render while the information is still being loaded
             <label>Course:
           <select id="coursesDropDown" name="player" value={this.state.player} 
             className="form-control form-center" onChange={this.handleChange}>

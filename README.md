@@ -1,7 +1,7 @@
 # Milestone 4
 This week, our group focused on finishing some of the missed items from last week as well as further expand the functionality of the rounds table system. The main items for the week were linking the courses database content to the roundsForm since that had been hardcoded in, complete the local user account page with facebook integration should the user choose to link their account, and the ability to view the details of a round in a non editing format. Due to various issues, only the first item in that list was fully completed (see issues #19 and #3 for further details)
 
-With this, the main files for review this week will be server.js for the routes associated with linking a Facebook account to a local user account and getting course  data from the database. RoundsForm.js for taking that data and putting it into <option> objects and CreateEditAccountDialog.js for being fully completed with the facebook integration button.
+With this, the main files for review this week will be server.js for the routes associated with linking a Facebook account to a local user account and getting course  data from the database. RoundsForm.js for taking that data and putting it into <option> objects and CreateEditAccountDialog.js for being fully completed with the facebook integration button. View.js is a newly created component, however it doesn't currently display due to functionality issues so it will not be linked below
 
 [server.js](https://github.com/wsu-cpts489-fa20/bp-sstrack/blob/master/server.js)
 
@@ -9,8 +9,7 @@ With this, the main files for review this week will be server.js for the routes 
 
 [CreateEditAccountDialog,js](https://github.com/wsu-cpts489-fa20/bp-sstrack/blob/master/client/src/components/CreateEditAccountDialog.js)
 
-
-Link to tests: 
+[Link to tests](https://drive.google.com/file/d/1BX4I4Yl8TL4sImDFXM2wrmFo5W9PDgCS/view?usp=sharing) 
 
 
 

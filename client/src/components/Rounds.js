@@ -93,7 +93,7 @@ class Rounds extends React.Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
                 },
-            method: 'GET',
+            method: 'PUT',
             body: JSON.stringify(newData)}); 
         const msg = await res.text();
         if (res.status != 200) {

@@ -166,7 +166,10 @@ color: gray;
 padding: 56px 8px 0px 8px;
 
 }
-
+.padded-view{
+  outline: 10px solid #13294E;
+  outline-offset: 2px;
+}
 .hide {
 display:none;
 }

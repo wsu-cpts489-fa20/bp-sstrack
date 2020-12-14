@@ -3,6 +3,8 @@ This week, our group focused on finishing some of the missed items from last wee
 
 With this, the main files for review this week will be server.js for the routes associated with linking a Facebook account to a local user account and getting course  data from the database. RoundsForm.js for taking that data and putting it into <option> objects and CreateEditAccountDialog.js for being fully completed with the facebook integration button. View.js is a newly created component, however it doesn't currently display due to functionality issues so it will not be linked below
 
+[Running Application](https://sstrack.us-west-2.elasticbeanstalk.com/)
+
 [server.js](https://github.com/wsu-cpts489-fa20/bp-sstrack/blob/master/server.js)
 
 [RoundForm.js](https://github.com/wsu-cpts489-fa20/bp-sstrack/blob/master/client/src/components/RoundForm.js)
